@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EntreNous — De vraies questions pour de vraies conversations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0c0c14;
+  --bg2: #13131f;
+  --bg3: #1c1c2e;
+  --text: #f0ede8;
+  --text-muted: #7a7a9a;
+  --text-dim: #4a4a6a;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.15);
+  --radius: 22px;
+  --radius-sm: 12px;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --philo: #8B3FD4;
+  --amour: #C4345A;
+  --drole: #E08020;
+  --passe: #9A7040;
+  --futur: #2A7FE4;
+  --intime: #D4627A;
+  --entrenous: #3A9A6A;
+  --societe: #5A6A8A;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── SCREENS ─────────────────────────────────────── */
+.screen { display: none; min-height: 100vh; flex-direction: column; align-items: center; }
+.screen.active { display: flex; }
+
+/* ── LANDING ─────────────────────────────────────── */
+#screen-landing {
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(100,60,200,0.18) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(196,52,90,0.10) 0%, transparent 60%),
+              var(--bg);
+  padding: 0 20px;
+}
+
+.landing-hero {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; padding: 80px 0 60px;
+  max-width: 600px; width: 100%;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 12vw, 80px);
+  font-weight: 700; letter-spacing: -1px;
+  background: linear-gradient(135deg, #f0ede8 30%, rgba(200,180,255,0.8));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; line-height: 1; margin-bottom: 16px;
+}
+
+.tagline {
+  font-size: clamp(15px, 3.5vw, 18px); color: var(--text-muted);
+  font-weight: 300; letter-spacing: 0.02em; margin-bottom: 48px; font-style: italic;
+}
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, #8B3FD4, #C4345A);
+  color: #fff; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600;
+  padding: 18px 40px; border-radius: 100px; border: none; cursor: pointer;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), opacity 0.2s;
+  box-shadow: 0 8px 40px rgba(139,63,212,0.35); letter-spacing: 0.01em;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 50px rgba(139,63,212,0.5); }
+.btn-primary:active { transform: translateY(0); opacity: 0.9; }
+
+.cards-preview {
+  display: flex; justify-content: center; align-items: center;
+  margin: 60px 0; height: 200px; position: relative; width: 100%;
+}
+
+.preview-card {
+  position: absolute; width: 130px; height: 180px; border-radius: 16px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 14px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.preview-card:nth-child(1) { transform: rotate(-12deg) translateX(-80px); z-index: 1; opacity: 0.7; }
+.preview-card:nth-child(2) { transform: rotate(-4deg) translateX(-20px); z-index: 2; opacity: 0.85; }
+.preview-card:nth-child(3) { transform: rotate(4deg) translateX(40px); z-index: 3; }
+.preview-card:nth-child(4) { transform: rotate(12deg) translateX(100px); z-index: 2; opacity: 0.7; }
+.preview-card-cat { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; margin-bottom: 8px; }
+.preview-card-text { font-family: 'Playfair Display', serif; font-size: 11px; line-height: 1.4; opacity: 0.9; }
+
+.landing-section { width: 100%; max-width: 680px; padding: 0 0 60px; }
+
+.section-title {
+  font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600;
+  text-align: center; margin-bottom: 32px; color: var(--text);
+}
+
+.modes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.mode-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px 20px; transition: border-color 0.2s, background 0.2s; cursor: pointer;
+}
+.mode-card:hover { border-color: var(--border-hover); background: var(--bg3); }
+.mode-icon { font-size: 28px; margin-bottom: 10px; }
+.mode-name { font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+.mode-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; font-weight: 300; }
+
+.categories-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; }
+.cat-chip {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 16px 8px; border-radius: var(--radius-sm); border: 1px solid var(--border);
+  background: var(--bg2); font-size: 11px; font-weight: 500; color: var(--text-muted); text-align: center;
+}
+.cat-chip-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* ── CONFIG ──────────────────────────────────────── */
+#screen-config { padding: 0 20px; background: var(--bg); }
+
+.config-inner { width: 100%; max-width: 480px; padding: 40px 0 80px; }
+
+.config-header { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; }
+
+.btn-back {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--bg2);
+  border: 1px solid var(--border); color: var(--text); font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s; flex-shrink: 0;
+}
+.btn-back:hover { background: var(--bg3); border-color: var(--border-hover); }
+
+.config-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; }
+.config-section { margin-bottom: 36px; }
+.config-label {
+  font-size: 12px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 14px;
+}
+
+.players-input-row { display: flex; gap: 10px; margin-bottom: 12px; }
+
+.input-field {
+  flex: 1; background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 16px; color: var(--text);
+  font-family: 'Inter', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s;
+}
+.input-field::placeholder { color: var(--text-dim); }
+.input-field:focus { border-color: var(--border-hover); }
+
+.btn-add {
+  width: 44px; height: 44px; background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text); font-size: 22px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+.btn-add:hover { background: var(--bg3); border-color: var(--border-hover); }
+
+.players-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.player-tag {
+  display: flex; align-items: center; gap: 8px; background: var(--bg3);
+  border: 1px solid var(--border); border-radius: 100px; padding: 6px 14px; font-size: 13px;
+}
+.player-tag-remove {
+  background: none; border: none; color: var(--text-muted); cursor: pointer;
+  font-size: 16px; padding: 0; line-height: 1; transition: color 0.2s;
+}
+.player-tag-remove:hover { color: #C4345A; }
+
+.modes-list { display: flex; flex-direction: column; gap: 10px; }
+.mode-option {
+  display: flex; align-items: center; gap: 14px; background: var(--bg2);
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  padding: 16px 18px; cursor: pointer; transition: border-color 0.2s, background 0.2s;
+}
+.mode-option:hover { border-color: var(--border-hover); background: var(--bg3); }
+.mode-option.selected { border-color: #8B3FD4; background: rgba(139,63,212,0.08); }
+.mode-option-icon { font-size: 22px; flex-shrink: 0; }
+.mode-option-info { flex: 1; }
+.mode-option-name { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
+.mode-option-desc { font-size: 12px; color: var(--text-muted); font-weight: 300; }
+.mode-option-check {
+  width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--border-hover);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-size: 11px; transition: background 0.2s, border-color 0.2s;
+}
+.mode-option.selected .mode-option-check { background: #8B3FD4; border-color: #8B3FD4; }
+
+.cat-toggles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cat-toggle {
+  display: flex; align-items: center; gap: 10px; background: var(--bg2);
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  padding: 12px 14px; cursor: pointer; transition: border-color 0.2s, background 0.2s; user-select: none;
+}
+.cat-toggle.active { background: rgba(255,255,255,0.04); }
+.cat-toggle .cat-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  opacity: 0.4; transition: opacity 0.2s, transform 0.2s;
+}
+.cat-toggle.active .cat-dot { opacity: 1; transform: scale(1.2); }
+.cat-toggle-name { font-size: 13px; font-weight: 500; flex: 1; opacity: 0.5; transition: opacity 0.2s; }
+.cat-toggle.active .cat-toggle-name { opacity: 1; }
+.cat-toggle-check { font-size: 13px; opacity: 0; transition: opacity 0.2s; }
+.cat-toggle.active .cat-toggle-check { opacity: 1; }
+
+.btn-start {
+  width: 100%; background: linear-gradient(135deg, #8B3FD4, #C4345A); color: #fff;
+  font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600;
+  padding: 18px; border-radius: 100px; border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  box-shadow: 0 8px 30px rgba(139,63,212,0.3); margin-top: 8px;
+}
+.btn-start:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(139,63,212,0.45); }
+.btn-start:active { transform: translateY(0); opacity: 0.9; }
+.btn-start:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+/* ── GAME ────────────────────────────────────────── */
+#screen-game { background: var(--bg); padding: 0; }
+
+.game-header {
+  width: 100%; max-width: 480px; padding: 24px 20px 0;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+
+.game-mode-badge {
+  display: flex; align-items: center; gap: 6px; background: var(--bg2);
+  border: 1px solid var(--border); border-radius: 100px; padding: 6px 14px;
+  font-size: 12px; font-weight: 500; color: var(--text-muted);
+}
+
+.game-counter { font-size: 13px; color: var(--text-dim); font-weight: 400; }
+
+.btn-icon {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--bg2);
+  border: 1px solid var(--border); color: var(--text-muted); font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s, color 0.2s; flex-shrink: 0;
+}
+.btn-icon:hover { background: var(--bg3); border-color: var(--border-hover); color: var(--text); }
+
+/* Card area — swipeable */
+.card-area {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 20px; width: 100%; position: relative;
+  cursor: grab; user-select: none; -webkit-user-select: none;
+}
+.card-area.dragging { cursor: grabbing; }
+
+/* Swipe hint overlays */
+.swipe-hint {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  font-size: 28px; opacity: 0; pointer-events: none;
+  transition: opacity 0.15s; z-index: 10;
+}
+.swipe-hint-left  { left: 24px; }
+.swipe-hint-right { right: 24px; }
+
+.card-wrapper { width: 100%; max-width: 360px; position: relative; }
+
+.game-card {
+  width: 100%; aspect-ratio: 2/3; border-radius: 24px; padding: 28px 26px;
+  display: flex; flex-direction: column; position: relative;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+  will-change: transform; overflow: hidden;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(28px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.game-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, rgba(255,255,255,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Top row: category + player badge */
+.card-top-row {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;
+}
+
+.card-category { display: flex; align-items: center; gap: 8px; }
+.card-cat-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.6); }
+.card-cat-name {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.12em; color: rgba(255,255,255,0.6);
+}
+
+.card-player-badge {
+  font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.1); padding: 4px 11px; border-radius: 100px;
+  max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  display: none;
+}
+.card-player-badge.visible { display: block; }
+
+.card-question {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 5vw, 26px); font-weight: 600;
+  line-height: 1.45; color: rgba(255,255,255,0.95);
+  flex: 1; display: flex; align-items: center; text-align: left; padding: 20px 0;
+}
+
+.card-actions {
+  display: flex; align-items: center; justify-content: space-between; margin-top: auto;
+}
+
+.card-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7); font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+}
+.card-btn:hover { background: rgba(255,255,255,0.18); color: #fff; transform: scale(1.08); }
+.card-btn.favorited { color: #ff6b8a; background: rgba(255,107,138,0.15); border-color: rgba(255,107,138,0.3); }
+
+.card-logo { font-family: 'Playfair Display', serif; font-size: 11px; font-style: italic; color: rgba(255,255,255,0.3); }
+
+/* Swipe arrows on card */
+.card-nav-hint {
+  position: absolute; bottom: 24px; left: 0; right: 0;
+  display: flex; justify-content: center; gap: 20px;
+  font-size: 11px; color: rgba(255,255,255,0.2);
+  letter-spacing: 0.05em; pointer-events: none;
+}
+
+/* Game footer */
+.game-footer {
+  width: 100%; max-width: 480px; padding: 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+
+.btn-next {
+  width: 100%; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text); font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500;
+  padding: 16px; border-radius: 100px; cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-next:hover { background: rgba(255,255,255,0.11); border-color: rgba(255,255,255,0.2); }
+
+.game-nav-row {
+  display: flex; gap: 12px; width: 100%;
+}
+.btn-prev {
+  flex: 0 0 auto; width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-muted); font-size: 20px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.btn-prev:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: var(--text); }
+.btn-prev:disabled { opacity: 0.25; cursor: not-allowed; }
+
+.btn-fav-go {
+  font-size: 13px; color: var(--text-muted); background: none; border: none;
+  cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+  transition: color 0.2s; font-family: 'Inter', sans-serif;
+}
+.btn-fav-go:hover { color: var(--text); }
+
+/* ── FAVORITES ───────────────────────────────────── */
+#screen-favorites { padding: 0 20px; background: var(--bg); }
+.fav-inner { width: 100%; max-width: 480px; padding: 40px 0 80px; }
+.fav-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+.fav-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; }
+.fav-count {
+  font-size: 13px; color: var(--text-muted); background: var(--bg2);
+  border: 1px solid var(--border); border-radius: 100px; padding: 4px 12px;
+}
+.fav-empty { text-align: center; color: var(--text-muted); padding: 80px 20px; font-size: 15px; line-height: 1.6; }
+.fav-empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
+
+.fav-grid { display: flex; flex-direction: column; gap: 12px; }
+.fav-card {
+  display: flex; align-items: flex-start; gap: 14px; background: var(--bg2);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 18px; transition: border-color 0.2s;
+}
+.fav-card:hover { border-color: var(--border-hover); }
+.fav-card-bar { width: 3px; align-self: stretch; border-radius: 4px; flex-shrink: 0; min-height: 40px; }
+.fav-card-content { flex: 1; }
+.fav-card-cat { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 6px; }
+.fav-card-question { font-family: 'Playfair Display', serif; font-size: 15px; line-height: 1.5; font-weight: 500; }
+.fav-card-remove {
+  background: none; border: none; color: var(--text-dim); font-size: 18px;
+  cursor: pointer; padding: 0; transition: color 0.2s; flex-shrink: 0;
+}
+.fav-card-remove:hover { color: #C4345A; }
+
+.btn-play-favs {
+  width: 100%; background: linear-gradient(135deg, #8B3FD4, #C4345A); color: #fff;
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
+  padding: 16px; border-radius: 100px; border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  box-shadow: 0 6px 24px rgba(139,63,212,0.3); margin-top: 24px;
+}
+.btn-play-favs:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(139,63,212,0.45); }
+.btn-play-favs:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+/* ── TOAST ───────────────────────────────────────── */
+.toast {
+  position: fixed; bottom: 32px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(30,30,50,0.96); border: 1px solid var(--border-hover);
+  color: var(--text); font-size: 13px; padding: 10px 20px; border-radius: 100px;
+  opacity: 0; transition: opacity 0.25s, transform 0.25s; pointer-events: none;
+  white-space: nowrap; z-index: 1000; backdrop-filter: blur(12px);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+.divider { height: 1px; background: var(--border); margin: 32px 0; }
+
+@media (max-width: 400px) {
+  .modes-grid { grid-template-columns: 1fr; }
+  .categories-strip { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ LANDING ══════════════════════════════════════════ -->
+<div id="screen-landing" class="screen active">
+  <div class="landing-hero">
+    <div class="logo">EntreNous</div>
+    <div class="tagline">De vraies questions pour de vraies conversations</div>
+    <button class="btn-primary" onclick="goTo('config')">Lancer le jeu <span>→</span></button>
+  </div>
+
+  <div class="cards-preview">
+    <div class="preview-card" style="background:linear-gradient(135deg,#1a0a30,#2d1555)">
+      <div class="preview-card-cat">Philosophie</div>
+      <div class="preview-card-text">Si tu pouvais changer une seule chose dans le monde...</div>
+    </div>
+    <div class="preview-card" style="background:linear-gradient(135deg,#2a0812,#4a1828)">
+      <div class="preview-card-cat">Amour</div>
+      <div class="preview-card-text">Tu crois à l'âme sœur ?</div>
+    </div>
+    <div class="preview-card" style="background:linear-gradient(135deg,#0d1f2a,#1a3a4a)">
+      <div class="preview-card-cat">Futur</div>
+      <div class="preview-card-text">Où tu te vois dans 10 ans ?</div>
+    </div>
+    <div class="preview-card" style="background:linear-gradient(135deg,#1a2a1a,#2a4a2a)">
+      <div class="preview-card-cat">EntreNous</div>
+      <div class="preview-card-text">Tu penses qu'on se connaît vraiment ?</div>
+    </div>
+  </div>
+
+  <div class="landing-section">
+    <div class="section-title">Choisissez votre mode</div>
+    <div class="modes-grid">
+      <div class="mode-card"><div class="mode-icon">🌙</div><div class="mode-name">Discussions tardives</div><div class="mode-desc">Pour creuser en profondeur. Ambiance 3h du matin.</div></div>
+      <div class="mode-card"><div class="mode-icon">🔥</div><div class="mode-name">Spicy</div><div class="mode-desc">Couples ou amis très proches. Questions épicées.</div></div>
+      <div class="mode-card"><div class="mode-icon">🤝</div><div class="mode-name">Découverte</div><div class="mode-desc">Apprendre à se connaître au-delà du superficiel.</div></div>
+      <div class="mode-card"><div class="mode-icon">✨</div><div class="mode-name">Normal</div><div class="mode-desc">Toutes les catégories, équilibré, pour n'importe quelle soirée.</div></div>
+    </div>
+    <div class="divider"></div>
+    <div class="section-title">8 catégories</div>
+    <div class="categories-strip">
+      <div class="cat-chip"><div class="cat-chip-dot" style="background:var(--philo)"></div>Philosophique</div>
+      <div class="cat-chip"><div class="cat-chip-dot" style="background:var(--amour)"></div>Amour</div>
+      <div class="cat-chip"><div class="cat-chip-dot" style="background:var(--drole)"></div>Drôle</div>
+      <div class="cat-chip"><div class="cat-chip-dot" style="background:var(--passe)"></div>Passé</div>
+      <div class="cat-chip"><div class="cat-chip-dot" style="background:var(--futur)"></div>Futur</div>
+      <div class="cat-chip"><div class="cat-chip-dot" style="background:var(--intime)"></div>Intime</div>
+      <div class="cat-chip"><div class="cat-chip-dot" style="background:var(--entrenous)"></div>EntreNous</div>
+      <div class="cat-chip"><div class="cat-chip-dot" style="background:var(--societe)"></div>Société</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONFIG ════════════════════════════════════════════ -->
+<div id="screen-config" class="screen">
+  <div class="config-inner">
+    <div class="config-header">
+      <button class="btn-back" onclick="goTo('landing')">←</button>
+      <div class="config-title">Configurer la partie</div>
+    </div>
+
+    <div class="config-section">
+      <div class="config-label">Joueurs <span style="opacity:0.4;font-weight:300">(optionnel)</span></div>
+      <div class="players-input-row">
+        <input id="player-input" class="input-field" type="text" placeholder="Ajouter un joueur..." maxlength="20">
+        <button class="btn-add" onclick="addPlayer()">+</button>
+      </div>
+      <div id="players-tags" class="players-tags"></div>
+    </div>
+
+    <div class="config-section">
+      <div class="config-label">Mode de jeu</div>
+      <div class="modes-list" id="modes-list">
+        <div class="mode-option" onclick="selectMode('normal')" data-mode="normal">
+          <div class="mode-option-icon">✨</div>
+          <div class="mode-option-info"><div class="mode-option-name">Normal</div><div class="mode-option-desc">Toutes catégories, pour n'importe quelle soirée</div></div>
+          <div class="mode-option-check"></div>
+        </div>
+        <div class="mode-option" onclick="selectMode('tardive')" data-mode="tardive">
+          <div class="mode-option-icon">🌙</div>
+          <div class="mode-option-info"><div class="mode-option-name">Discussions tardives</div><div class="mode-option-desc">Profond, intense, ambiance 3h du matin</div></div>
+          <div class="mode-option-check"></div>
+        </div>
+        <div class="mode-option" onclick="selectMode('spicy')" data-mode="spicy">
+          <div class="mode-option-icon">🔥</div>
+          <div class="mode-option-info"><div class="mode-option-name">Spicy</div><div class="mode-option-desc">Couples ou amis très proches — questions épicées et osées</div></div>
+          <div class="mode-option-check"></div>
+        </div>
+        <div class="mode-option" onclick="selectMode('decouverte')" data-mode="decouverte">
+          <div class="mode-option-icon">🤝</div>
+          <div class="mode-option-info"><div class="mode-option-name">Découverte</div><div class="mode-option-desc">Apprendre à se connaître au-delà du superficiel</div></div>
+          <div class="mode-option-check"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="config-section" id="cat-section">
+      <div class="config-label">Catégories</div>
+      <div class="cat-toggles" id="cat-toggles"></div>
+    </div>
+
+    <button class="btn-start" id="btn-start" onclick="startGame()" disabled>Commencer →</button>
+  </div>
+</div>
+
+<!-- ══ GAME ══════════════════════════════════════════════ -->
+<div id="screen-game" class="screen">
+  <div class="game-header">
+    <button class="btn-icon" onclick="goTo('landing')" title="Quitter">✕</button>
+    <div class="game-mode-badge">
+      <span id="game-mode-icon">✨</span>
+      <span id="game-mode-name">Normal</span>
+    </div>
+    <button class="btn-icon" onclick="goTo('favorites')" title="Favoris">♡</button>
+  </div>
+
+  <div class="card-area" id="card-area">
+    <div class="swipe-hint swipe-hint-left" id="hint-left">←</div>
+    <div class="swipe-hint swipe-hint-right" id="hint-right">→</div>
+    <div class="card-wrapper">
+      <div class="game-card" id="game-card">
+        <div class="card-top-row">
+          <div class="card-category">
+            <div class="card-cat-dot" id="card-cat-dot"></div>
+            <div class="card-cat-name" id="card-cat-name">Catégorie</div>
+          </div>
+          <div class="card-player-badge" id="card-player-badge"></div>
+        </div>
+        <div class="card-question" id="card-question">La question apparaît ici</div>
+        <div class="card-actions">
+          <div class="card-logo">EntreNous</div>
+          <div style="display:flex;gap:8px;">
+            <button class="card-btn" id="btn-share" onclick="shareCard()" title="Partager">⬆</button>
+            <button class="card-btn" id="btn-fav" onclick="toggleFav()" title="Favori">♡</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-footer">
+    <div class="game-counter" id="game-counter">1 / 0</div>
+    <div class="game-nav-row">
+      <button class="btn-prev" id="btn-prev" onclick="prevCard()" title="Carte précédente" disabled>←</button>
+      <button class="btn-next" style="flex:1" onclick="nextCard()">Piocher une carte →</button>
+    </div>
+    <button class="btn-fav-go" onclick="goTo('favorites')">Voir mes coups de cœur</button>
+  </div>
+</div>
+
+<!-- ══ FAVORITES ═════════════════════════════════════════ -->
+<div id="screen-favorites" class="screen">
+  <div class="fav-inner">
+    <div class="fav-header">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="btn-back" id="fav-back-btn" onclick="goTo('game')">←</button>
+        <div class="fav-title">Coups de cœur</div>
+      </div>
+      <div class="fav-count" id="fav-count">0</div>
+    </div>
+    <div id="fav-content"></div>
+    <button class="btn-play-favs" id="btn-play-favs" onclick="playFavs()" disabled>Jouer avec mes favoris →</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ── DATA ─────────────────────────────────────────────── */
+const CATEGORIES = {
+  philo:     { name: 'Philosophique', color: '#8B3FD4', bg: 'linear-gradient(150deg,#1a0a30 0%,#2d1555 100%)' },
+  amour:     { name: 'Amour',         color: '#C4345A', bg: 'linear-gradient(150deg,#2a0812 0%,#4a1428 100%)' },
+  drole:     { name: 'Drôle',         color: '#E08020', bg: 'linear-gradient(150deg,#281508 0%,#4a2810 100%)' },
+  passe:     { name: 'Passé',         color: '#9A7040', bg: 'linear-gradient(150deg,#1e1208 0%,#362010 100%)' },
+  futur:     { name: 'Futur',         color: '#2A7FE4', bg: 'linear-gradient(150deg,#081428 0%,#0f2a4a 100%)' },
+  intime:    { name: 'Intime',        color: '#D4627A', bg: 'linear-gradient(150deg,#280a14 0%,#4a1828 100%)' },
+  entrenous: { name: 'EntreNous',     color: '#3A9A6A', bg: 'linear-gradient(150deg,#0a1e12 0%,#183828 100%)' },
+  societe:   { name: 'Société',       color: '#5A6A8A', bg: 'linear-gradient(150deg,#0e1420 0%,#1c2838 100%)' },
+};
+
+const QUESTIONS = [
+  // ── Philosophique ──────────────────────────────────
+  {id:1,  cat:'philo', text:"Si tu pouvais changer une seule chose dans le monde, ce serait quoi ?"},
+  {id:2,  cat:'philo', text:"Est-ce que tu crois que tout arrive pour une raison ?"},
+  {id:3,  cat:'philo', text:"C'est quoi pour toi la définition du bonheur ?"},
+  {id:4,  cat:'philo', text:"Tu préfères avoir raison ou être heureux ?"},
+  {id:5,  cat:'philo', text:"Si tu pouvais vivre éternellement, est-ce que tu le ferais ? Pourquoi ?"},
+  {id:6,  cat:'philo', text:"C'est quoi la chose la plus précieuse que l'argent ne peut pas acheter ?"},
+  {id:7,  cat:'philo', text:"Est-ce que l'être humain est fondamentalement bon ou mauvais selon toi ?"},
+  {id:8,  cat:'philo', text:"C'est quoi le sens de la vie pour toi ?"},
+  {id:9,  cat:'philo', text:"Si tu devais choisir entre la liberté totale et la sécurité totale, tu choisirais quoi ?"},
+  {id:10, cat:'philo', text:"C'est quoi pour toi la différence entre vivre et exister ?"},
+  {id:11, cat:'philo', text:"Est-ce que tu crois en quelque chose de plus grand que toi ?"},
+  {id:12, cat:'philo', text:"Si tu pouvais connaître la date de ta mort, tu voudrais le savoir ?"},
+  {id:13, cat:'philo', text:"C'est quoi une vérité que tout le monde connaît mais que personne ne dit à voix haute ?"},
+  {id:14, cat:'philo', text:"Le destin existe ou tout est un choix ?"},
+  {id:15, cat:'philo', text:"C'est quoi l'expérience qui t'a le plus transformé ?"},
+  {id:16, cat:'philo', text:"Si tu pouvais effacer un souvenir douloureux, est-ce que tu le ferais ?"},
+  {id:17, cat:'philo', text:"C'est quoi la différence entre être seul et se sentir seul ?"},
+  {id:18, cat:'philo', text:"Tu penses qu'on peut vraiment changer qui on est au fond ?"},
+  {id:19, cat:'philo', text:"C'est quoi ta plus grande vérité sur toi-même que tu as du mal à accepter ?"},
+  {id:20, cat:'philo', text:"Est-ce que tu penses que les gens naissent avec un caractère ou qu'ils le construisent ?"},
+  {id:21, cat:'philo', text:"Si tu devais expliquer ce qu'est l'amour à quelqu'un qui ne l'a jamais ressenti, tu dirais quoi ?"},
+  {id:22, cat:'philo', text:"C'est quoi pour toi la plus belle forme de courage ?"},
+
+  // ── Amour ─────────────────────────────────────────
+  {id:30, cat:'amour', text:"C'est quoi pour toi le vrai amour ?"},
+  {id:31, cat:'amour', text:"Tu crois à l'âme sœur ?"},
+  {id:32, cat:'amour', text:"Qu'est-ce que tu recherches vraiment chez un partenaire ?"},
+  {id:33, cat:'amour', text:"Tu as déjà aimé quelqu'un en silence ? Comment c'était ?"},
+  {id:34, cat:'amour', text:"C'est quoi la chose la plus courageuse que tu aies faite par amour ?"},
+  {id:35, cat:'amour', text:"Comment tu sais que tu es vraiment amoureux ?"},
+  {id:36, cat:'amour', text:"T'est-il déjà arrivé d'aimer deux personnes en même temps ?"},
+  {id:37, cat:'amour', text:"C'est quoi pour toi un deal-breaker absolu dans une relation ?"},
+  {id:38, cat:'amour', text:"Tu as déjà été brisé par quelqu'un ? Comment tu t'en es remis ?"},
+  {id:39, cat:'amour', text:"C'est quoi la différence entre l'amour et l'attachement ?"},
+  {id:40, cat:'amour', text:"Est-ce qu'on peut aimer quelqu'un et ne pas lui faire confiance ?"},
+  {id:41, cat:'amour', text:"C'est quoi la chose la plus romantique qu'on t'ait jamais faite ?"},
+  {id:42, cat:'amour', text:"Est-ce que tu penses que l'amour peut durer toute une vie ?"},
+  {id:43, cat:'amour', text:"Tu as déjà choisi quelqu'un par peur d'être seul ?"},
+  {id:44, cat:'amour', text:"C'est quoi la leçon la plus dure qu'une relation t'a apprise ?"},
+  {id:45, cat:'amour', text:"Si tu pouvais revivre un moment avec quelqu'un que tu as aimé, lequel ce serait ?"},
+  {id:46, cat:'amour', text:"C'est quoi la chose dont tu as besoin dans une relation mais que tu n'oses pas demander ?"},
+  {id:47, cat:'amour', text:"Tu aimes plus ou tu te laisses aimer ?"},
+  {id:48, cat:'amour', text:"C'est quoi le plus beau geste d'amour que tu aies jamais reçu ?"},
+  {id:49, cat:'amour', text:"Tu as déjà eu des sentiments pour quelqu'un qui était en couple ?"},
+  {id:50, cat:'amour', text:"C'est quoi pour toi la différence entre tomber amoureux et rester amoureux ?"},
+  {id:51, cat:'amour', text:"Tu penses qu'un ex peut vraiment rester un ami ?"},
+
+  // ── Drôle ─────────────────────────────────────────
+  {id:60, cat:'drole', text:"Si ta vie était un film, quel serait le titre et le genre ?"},
+  {id:61, cat:'drole', text:"C'est quoi le truc le plus gênant qui t'est arrivé ?"},
+  {id:62, cat:'drole', text:"Tu as déjà fait semblant d'aimer un cadeau ? Raconte."},
+  {id:63, cat:'drole', text:"C'est quoi ton talent caché le plus inutile ?"},
+  {id:64, cat:'drole', text:"Si tu étais un emoji, lequel tu serais et pourquoi ?"},
+  {id:65, cat:'drole', text:"C'est quoi la chose la plus stupide que tu aies faite pour faire rire quelqu'un ?"},
+  {id:66, cat:'drole', text:"Quelle est la rumeur la plus bizarre qui a circulé sur toi ?"},
+  {id:67, cat:'drole', text:"Si tu pouvais avoir un super-pouvoir complètement inutile, lequel ce serait ?"},
+  {id:68, cat:'drole', text:"C'est quoi ton obsession secrète et totalement illogique ?"},
+  {id:69, cat:'drole', text:"Tu as déjà envoyé un message au mauvais destinataire ? Raconte."},
+  {id:70, cat:'drole', text:"C'est quoi la peur la plus irrationnelle que tu aies ?"},
+  {id:71, cat:'drole', text:"Si tu devais vivre dans une série TV, laquelle tu choisirais ?"},
+  {id:72, cat:'drole', text:"C'est quoi ton excuse la plus créative pour te défiler de quelque chose ?"},
+  {id:73, cat:'drole', text:"Tu as déjà menti sur quelque chose de complètement ridicule ?"},
+  {id:74, cat:'drole', text:"C'est quoi le truc le plus enfantin que tu fasses encore ?"},
+  {id:75, cat:'drole', text:"Tu as déjà parlé à toi-même à voix haute en public par accident ?"},
+  {id:76, cat:'drole', text:"C'est quoi ton habitude la plus bizarre que tu n'avoues généralement pas ?"},
+  {id:77, cat:'drole', text:"Si tu avais un million d'euros à dépenser en 24h de manière stupide, tu ferais quoi ?"},
+  {id:78, cat:'drole', text:"C'est quoi la chanson que tu chantes sous la douche en ce moment ?"},
+  {id:79, cat:'drole', text:"Tu as déjà fait un truc complètement hors de ton personnage ? Raconte."},
+  {id:80, cat:'drole', text:"Si tu devais choisir un animal pour te représenter, ce serait lequel et pourquoi ?"},
+  {id:81, cat:'drole', text:"C'est quoi le truc le plus absurde dont tu t'es déjà énervé ?"},
+
+  // ── Passé ─────────────────────────────────────────
+  {id:90, cat:'passe', text:"C'est quoi le souvenir d'enfance qui te fait encore sourire ?"},
+  {id:91, cat:'passe', text:"Tu as un regret que tu portes encore ?"},
+  {id:92, cat:'passe', text:"Quelle période de ta vie tu revivrais si tu pouvais ?"},
+  {id:93, cat:'passe', text:"C'est quoi la décision passée qui a le plus changé ta vie ?"},
+  {id:94, cat:'passe', text:"Qui t'a le plus marqué dans ton enfance ?"},
+  {id:95, cat:'passe', text:"C'est quoi la chose que la version de toi d'il y a 5 ans ne comprendrait pas aujourd'hui ?"},
+  {id:96, cat:'passe', text:"Il y a un moment de ta vie que tu aurais aimé vivre autrement ?"},
+  {id:97, cat:'passe', text:"C'est quoi la chose dont tu es le plus fier dans ton passé ?"},
+  {id:98, cat:'passe', text:"Tu as déjà fait quelque chose dont tu n'es pas fier mais que tu referais quand même ?"},
+  {id:99, cat:'passe', text:"C'est quoi le moment où tu as réalisé que tu avais vraiment grandi ?"},
+  {id:100,cat:'passe', text:"Il y a une personne de ton passé que tu aimerais retrouver ?"},
+  {id:101,cat:'passe', text:"C'est quoi la meilleure décision que tu aies jamais prise ?"},
+  {id:102,cat:'passe', text:"C'est quoi le moment où tu as compris ce qui comptait vraiment pour toi ?"},
+  {id:103,cat:'passe', text:"Qu'est-ce que tu dirais à une version plus jeune de toi si tu pouvais ?"},
+  {id:104,cat:'passe', text:"C'est quoi l'obstacle que tu es le plus fier d'avoir surmonté ?"},
+  {id:105,cat:'passe', text:"Tu as déjà tout quitté pour quelque chose ou quelqu'un ?"},
+  {id:106,cat:'passe', text:"C'est quoi la chose du passé qui influence encore le plus ta façon d'agir aujourd'hui ?"},
+  {id:107,cat:'passe', text:"Il y a une erreur passée qui t'a finalement mené quelque part de bien ?"},
+  {id:108,cat:'passe', text:"C'est quoi la période la plus difficile de ta vie et comment tu l'as traversée ?"},
+  {id:109,cat:'passe', text:"Tu as déjà renoncé à quelque chose d'important ? Tu le regrettes ?"},
+  {id:110,cat:'passe', text:"C'est quoi la version de toi dont tu es le moins fier ?"},
+
+  // ── Futur ─────────────────────────────────────────
+  {id:120,cat:'futur', text:"Où tu te vois dans 10 ans ?"},
+  {id:121,cat:'futur', text:"C'est quoi ta plus grande peur pour l'avenir ?"},
+  {id:122,cat:'futur', text:"Si tu pouvais garantir une seule chose pour ton futur, ce serait quoi ?"},
+  {id:123,cat:'futur', text:"C'est quoi le projet dont tu parles depuis longtemps mais que tu n'as pas lancé ?"},
+  {id:124,cat:'futur', text:"Dans 20 ans, qu'est-ce que tu veux que les gens disent de toi ?"},
+  {id:125,cat:'futur', text:"Si tu ne pouvais pas échouer, qu'est-ce que tu essaierais de faire ?"},
+  {id:126,cat:'futur', text:"Tu veux des enfants ? Pourquoi ?"},
+  {id:127,cat:'futur', text:"C'est quoi le truc que tu regrettes de ne pas avoir commencé plus tôt ?"},
+  {id:128,cat:'futur', text:"Si tu savais que tu allais mourir dans un an, qu'est-ce que tu ferais différemment ?"},
+  {id:129,cat:'futur', text:"C'est quoi ton objectif le plus ambitieux ?"},
+  {id:130,cat:'futur', text:"Tu as une vision claire de ce que tu veux ou tu avances un peu à l'aveugle ?"},
+  {id:131,cat:'futur', text:"C'est quoi la chose que tu t'interdis de vouloir parce que tu penses que c'est hors de portée ?"},
+  {id:132,cat:'futur', text:"Si tu pouvais changer de vie du jour au lendemain, tu le ferais ?"},
+  {id:133,cat:'futur', text:"C'est quoi ta définition du succès ?"},
+  {id:134,cat:'futur', text:"Tu penses que tu seras plus heureux dans 10 ans qu'aujourd'hui ?"},
+  {id:135,cat:'futur', text:"C'est quoi la compétence que tu veux absolument acquérir ?"},
+  {id:136,cat:'futur', text:"Si tu devais choisir un pays pour vivre le reste de ta vie, ce serait lequel ?"},
+  {id:137,cat:'futur', text:"Tu as peur de vieillir ? Pourquoi ?"},
+  {id:138,cat:'futur', text:"C'est quoi la chose que tu feras dès demain si tu te promets de la faire vraiment ?"},
+  {id:139,cat:'futur', text:"Tu te vois vivre seul ou avec quelqu'un dans 10 ans ?"},
+  {id:140,cat:'futur', text:"C'est quoi le rêve que tu n'as encore dit à personne ?"},
+
+  // ── Intime ────────────────────────────────────────
+  {id:150,cat:'intime', text:"C'est quoi ta plus grande insécurité ?"},
+  {id:151,cat:'intime', text:"Tu te sens vraiment compris par les gens qui t'entourent ?"},
+  {id:152,cat:'intime', text:"Qu'est-ce que les gens pensent de toi qui est complètement faux ?"},
+  {id:153,cat:'intime', text:"Tu as déjà eu une pensée que tu n'oserais jamais dire à voix haute ?"},
+  {id:154,cat:'intime', text:"C'est quoi la chose dont tu as le plus honte dans ta vie ?"},
+  {id:155,cat:'intime', text:"Si les gens pouvaient voir à l'intérieur de toi, qu'est-ce qui les surprendrait le plus ?"},
+  {id:156,cat:'intime', text:"Tu te parles comment quand tu es seul avec toi-même ?"},
+  {id:157,cat:'intime', text:"C'est quoi la chose que tu voudrais que les autres comprennent sur toi sans que tu aies à l'expliquer ?"},
+  {id:158,cat:'intime', text:"Tu as déjà eu envie de tout laisser tomber ? Qu'est-ce qui t'a retenu ?"},
+  {id:159,cat:'intime', text:"C'est quoi le masque que tu portes le plus souvent ?"},
+  {id:160,cat:'intime', text:"Tu as une facette de toi que tu caches même à tes proches ?"},
+  {id:161,cat:'intime', text:"C'est quoi le compliment qui t'a le plus touché dans ta vie ?"},
+  {id:162,cat:'intime', text:"Tu as déjà eu honte d'une partie de ton identité ?"},
+  {id:163,cat:'intime', text:"C'est quoi la chose que tu fais pour te sentir bien quand tu vas vraiment mal ?"},
+  {id:164,cat:'intime', text:"Tu te considères comme quelqu'un de bien ? Pourquoi ?"},
+  {id:165,cat:'intime', text:"C'est quoi la chose que tu acceptes difficilement chez toi ?"},
+  {id:166,cat:'intime', text:"Tu as peur de quoi au fond ?"},
+  {id:167,cat:'intime', text:"C'est quoi le moment où tu t'es senti le plus seul ?"},
+  {id:168,cat:'intime', text:"Tu te sens à ta place dans ta vie en ce moment ?"},
+  {id:169,cat:'intime', text:"C'est quoi quelque chose que tu t'es promis et que tu n'as pas tenu ?"},
+  {id:170,cat:'intime', text:"Est-ce que tu te fais confiance ?"},
+
+  // ── EntreNous ─────────────────────────────────────
+  {id:180,cat:'entrenous', text:"C'est quoi la première chose que tu as pensé de moi quand on s'est rencontrés ?"},
+  {id:181,cat:'entrenous', text:"Il y a quelque chose que tu voudrais me dire mais que tu n'as jamais osé ?"},
+  {id:182,cat:'entrenous', text:"Tu penses qu'on se connaît vraiment ?"},
+  {id:183,cat:'entrenous', text:"C'est quoi la chose que tu apprécies le plus en moi ?"},
+  {id:184,cat:'entrenous', text:"C'est quoi un moment où j'ai changé ta façon de voir les choses ?"},
+  {id:185,cat:'entrenous', text:"Si tu devais décrire notre relation en un seul mot, ce serait lequel ?"},
+  {id:186,cat:'entrenous', text:"C'est quoi quelque chose que tu aurais aimé me dire il y a longtemps ?"},
+  {id:187,cat:'entrenous', text:"Il y a un malentendu entre nous que tu n'as jamais vraiment résolu ?"},
+  {id:188,cat:'entrenous', text:"C'est quoi la chose que tu aimes le moins chez moi mais que tu acceptes quand même ?"},
+  {id:189,cat:'entrenous', text:"Tu as déjà eu peur de me perdre ?"},
+  {id:190,cat:'entrenous', text:"C'est quoi le moment où tu as réalisé qu'on avait une vraie connexion ?"},
+  {id:191,cat:'entrenous', text:"Il y a quelque chose que tu fais différemment depuis qu'on se connaît ?"},
+  {id:192,cat:'entrenous', text:"C'est quoi le souvenir qui te fait sourire quand tu penses à nous ?"},
+  {id:193,cat:'entrenous', text:"Si tu devais me présenter à quelqu'un, qu'est-ce que tu dirais de moi ?"},
+  {id:194,cat:'entrenous', text:"Tu penses que je suis tel que je me présente ou tu vois quelque chose que les autres ne voient pas ?"},
+  {id:195,cat:'entrenous', text:"C'est quoi la conversation qu'on n'a jamais eue et qu'on devrait avoir ?"},
+  {id:196,cat:'entrenous', text:"Si tu pouvais me donner un seul conseil, ce serait lequel ?"},
+  {id:197,cat:'entrenous', text:"Tu m'as déjà jugé sans me le dire ?"},
+  {id:198,cat:'entrenous', text:"C'est quoi la chose que tu ferais différemment dans notre relation si tu pouvais ?"},
+  {id:199,cat:'entrenous', text:"Est-ce que tu penses qu'on se ressemble plus qu'on ne le montre ?"},
+  {id:200,cat:'entrenous', text:"C'est quoi quelque chose que tu n'as dit à personne d'autre qu'à moi ?"},
+
+  // ── Société ───────────────────────────────────────
+  {id:210,cat:'societe', text:"C'est quoi le plus grand problème de notre génération ?"},
+  {id:211,cat:'societe', text:"Tu penses que les réseaux sociaux font plus de bien que de mal ?"},
+  {id:212,cat:'societe', text:"C'est quoi une opinion impopulaire que tu assumes pleinement ?"},
+  {id:213,cat:'societe', text:"Tu te sens libre dans la société dans laquelle tu vis ?"},
+  {id:214,cat:'societe', text:"C'est quoi une injustice qui t'énerve vraiment ?"},
+  {id:215,cat:'societe', text:"Si tu étais au pouvoir demain, quelle serait ta première décision ?"},
+  {id:216,cat:'societe', text:"C'est quoi un sujet dont on ne parle pas assez ?"},
+  {id:217,cat:'societe', text:"Tu penses que les médias nous montrent la réalité ?"},
+  {id:218,cat:'societe', text:"Tu te sens concerné par ce qui se passe dans le monde ou tu préfères t'en détacher ?"},
+  {id:219,cat:'societe', text:"C'est quoi une norme sociale que tu trouves absurde ?"},
+  {id:220,cat:'societe', text:"Tu penses qu'il est encore possible de changer les choses à grande échelle ?"},
+  {id:221,cat:'societe', text:"Internet a changé ta façon de penser. Dans quel sens ?"},
+  {id:222,cat:'societe', text:"C'est quoi un privilège que tu as et dont tu ne te rends pas toujours compte ?"},
+  {id:223,cat:'societe', text:"Tu penses qu'on vit mieux ou moins bien que la génération de nos parents ?"},
+  {id:224,cat:'societe', text:"C'est quoi une valeur que la société actuelle perd selon toi ?"},
+  {id:225,cat:'societe', text:"Tu fais confiance aux institutions — gouvernement, justice, médias ?"},
+  {id:226,cat:'societe', text:"C'est quoi le combat de ta génération ?"},
+  {id:227,cat:'societe', text:"Tu penses que l'intelligence artificielle va changer ta vie ? Comment ?"},
+  {id:228,cat:'societe', text:"C'est quoi une chose que ta culture t'a apprise que tu n'aurais pas voulu apprendre ?"},
+  {id:229,cat:'societe', text:"Est-ce qu'on a le droit de juger les choix de vie des autres ?"},
+  {id:230,cat:'societe', text:"C'est quoi quelque chose que notre société fait vraiment bien ?"},
+
+  // ── Spicy (toutes catégories, mode Spicy uniquement) ──
+  {id:300,cat:'amour',     spicy:true, text:"C'est quoi ta position sexuelle préférée ?"},
+  {id:301,cat:'intime',    spicy:true, text:"Tu préfères être dominant ou soumis ?"},
+  {id:302,cat:'intime',    spicy:true, text:"C'est quoi ton fantasme que tu n'as jamais réalisé et que tu aimerais réaliser ?"},
+  {id:303,cat:'intime',    spicy:true, text:"Tu as déjà fait quelque chose d'osé dans un lieu public ?"},
+  {id:304,cat:'intime',    spicy:true, text:"C'est quoi la chose la plus folle que tu aies faite sexuellement ?"},
+  {id:305,cat:'amour',     spicy:true, text:"C'est quoi ton type physique idéal, sans filtre ?"},
+  {id:306,cat:'intime',    spicy:true, text:"Tu as déjà envoyé ou reçu des photos compromettantes ?"},
+  {id:307,cat:'amour',     spicy:true, text:"C'est quoi le truc qui t'attire le plus chez quelqu'un physiquement ?"},
+  {id:308,cat:'entrenous', spicy:true, text:"Tu as déjà eu un crush sur quelqu'un dans ce groupe ?"},
+  {id:309,cat:'entrenous', spicy:true, text:"Tu as déjà embrassé ou voulu embrasser quelqu'un ici ?"},
+  {id:310,cat:'intime',    spicy:true, text:"C'est quoi ta plus grande curiosité sexuelle que tu n'as pas encore explorée ?"},
+  {id:311,cat:'amour',     spicy:true, text:"C'est quoi la chose la plus osée que tu voudrais qu'on te fasse ?"},
+  {id:312,cat:'intime',    spicy:true, text:"C'est quoi le lieu le plus inhabituel où tu as déjà fait quelque chose d'osé ?"},
+  {id:313,cat:'intime',    spicy:true, text:"Tu as déjà joué un rôle dans une situation intime ?"},
+  {id:314,cat:'amour',     spicy:true, text:"C'est quoi ton red flag qui t'attire malgré toi ?"},
+  {id:315,cat:'intime',    spicy:true, text:"Tu as déjà sexté ? C'était bien ?"},
+  {id:316,cat:'amour',     spicy:true, text:"C'est quoi la chose la plus dingue que tu ferais pour séduire quelqu'un qui te plaît vraiment ?"},
+  {id:317,cat:'intime',    spicy:true, text:"Tu préfères l'amour physique intense et court ou tendre et long ?"},
+  {id:318,cat:'amour',     spicy:true, text:"C'est quoi le baiser dont tu te souviens le plus ?"},
+  {id:319,cat:'intime',    spicy:true, text:"Tu as déjà attiré quelqu'un sans le vouloir ? Comment tu l'as géré ?"},
+  {id:320,cat:'entrenous', spicy:true, text:"Si tu devais embrasser quelqu'un dans ce groupe, ce serait qui ?"},
+  {id:321,cat:'amour',     spicy:true, text:"Tu préfères être séduit ou séduire ?"},
+  {id:322,cat:'intime',    spicy:true, text:"C'est quoi la chose la plus sexy que quelqu'un puisse faire sans s'en rendre compte ?"},
+  {id:323,cat:'amour',     spicy:true, text:"Tu as déjà été dans une situation de tension sexuelle avec quelqu'un dans ton entourage proche ?"},
+  {id:324,cat:'intime',    spicy:true, text:"C'est quoi quelque chose que tu aimes dans l'intimité mais que tu n'avoues généralement pas ?"},
+];
+
+const MODE_CATS = {
+  normal:     Object.keys(CATEGORIES),
+  tardive:    ['philo','futur','intime','passe','societe'],
+  spicy:      ['amour','intime','entrenous','drole'],
+  decouverte: ['passe','futur','philo','societe','entrenous','drole'],
+};
+
+const MODE_META = {
+  normal:     { icon:'✨', name:'Normal' },
+  tardive:    { icon:'🌙', name:'Discussions tardives' },
+  spicy:      { icon:'🔥', name:'Spicy' },
+  decouverte: { icon:'🤝', name:'Découverte' },
+};
+
+/* ── STATE ─────────────────────────────────────────────── */
+const state = {
+  players: [], mode: null,
+  selectedCats: new Set(Object.keys(CATEGORIES)),
+  deck: [], index: 0, playerIndex: 0,
+  favorites: new Set(JSON.parse(localStorage.getItem('en_favs') || '[]')),
+  favMode: false,
+};
+
+/* ── NAVIGATION ────────────────────────────────────────── */
+function goTo(screen) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + screen).classList.add('active');
+  window.scrollTo(0, 0);
+  if (screen === 'favorites') renderFavorites();
+  if (screen === 'config') renderConfig();
+}
+
+/* ── CONFIG ────────────────────────────────────────────── */
+function renderConfig() {
+  renderCategoryToggles();
+  updateCatSection();
+}
+
+function renderCategoryToggles() {
+  const container = document.getElementById('cat-toggles');
+  container.innerHTML = '';
+  Object.entries(CATEGORIES).forEach(([key, cat]) => {
+    const isActive = state.selectedCats.has(key);
+    const div = document.createElement('div');
+    div.className = 'cat-toggle' + (isActive ? ' active' : '');
+    div.dataset.key = key;
+    div.innerHTML = `
+      <div class="cat-dot" style="background:${cat.color}"></div>
+      <div class="cat-toggle-name">${cat.name}</div>
+      <div class="cat-toggle-check">✓</div>`;
+    div.onclick = () => toggleCat(key);
+    container.appendChild(div);
+  });
+}
+
+function toggleCat(key) {
+  if (state.selectedCats.has(key)) {
+    if (state.selectedCats.size > 1) state.selectedCats.delete(key);
+    else { showToast('Au moins une catégorie requise'); return; }
+  } else {
+    state.selectedCats.add(key);
+  }
+  renderCategoryToggles();
+  updateStartBtn();
+}
+
+function selectMode(mode) {
+  state.mode = mode;
+  document.querySelectorAll('.mode-option').forEach(el => {
+    const selected = el.dataset.mode === mode;
+    el.classList.toggle('selected', selected);
+    el.querySelector('.mode-option-check').textContent = selected ? '✓' : '';
+  });
+  state.selectedCats = new Set(mode === 'normal' ? Object.keys(CATEGORIES) : MODE_CATS[mode]);
+  renderCategoryToggles();
+  updateCatSection();
+  updateStartBtn();
+}
+
+function updateCatSection() {
+  document.getElementById('cat-section').style.display = state.mode === 'normal' ? '' : 'none';
+}
+
+function updateStartBtn() {
+  document.getElementById('btn-start').disabled = !state.mode;
+}
+
+function addPlayer() {
+  const input = document.getElementById('player-input');
+  const name = input.value.trim();
+  if (!name) return;
+  if (state.players.includes(name)) { showToast('Joueur déjà ajouté'); return; }
+  if (state.players.length >= 8) { showToast('Maximum 8 joueurs'); return; }
+  state.players.push(name);
+  input.value = '';
+  renderPlayers();
+}
+
+function removePlayer(name) {
+  state.players = state.players.filter(p => p !== name);
+  renderPlayers();
+}
+
+function renderPlayers() {
+  document.getElementById('players-tags').innerHTML = state.players.map(name => `
+    <div class="player-tag">
+      <span>${name}</span>
+      <button class="player-tag-remove" onclick="removePlayer('${name.replace(/'/g,"\\'")}')">×</button>
+    </div>`).join('');
+}
+
+/* ── GAME ──────────────────────────────────────────────── */
+function startGame(fromFavs = false) {
+  state.favMode = fromFavs;
+  state.playerIndex = 0;
+
+  let pool;
+  if (fromFavs) {
+    pool = QUESTIONS.filter(q => state.favorites.has(q.id));
+  } else if (state.mode === 'spicy') {
+    pool = QUESTIONS.filter(q => q.spicy === true);
+  } else {
+    const cats = state.mode === 'normal' ? [...state.selectedCats] : MODE_CATS[state.mode];
+    pool = QUESTIONS.filter(q => cats.includes(q.cat) && !q.spicy);
+  }
+
+  if (pool.length === 0) {
+    showToast('Aucune question disponible pour cette sélection.');
+    return;
+  }
+
+  state.deck = shuffle([...pool]);
+  state.index = 0;
+
+  const meta = fromFavs ? { icon:'♡', name:'Coups de cœur' } : MODE_META[state.mode];
+  document.getElementById('game-mode-icon').textContent = meta.icon;
+  document.getElementById('game-mode-name').textContent = meta.name;
+
+  goTo('game');
+  renderCard(true);
+}
+
+function playFavs() {
+  if (state.favorites.size === 0) return;
+  startGame(true);
+}
+
+function renderCard(animate = false) {
+  if (state.deck.length === 0) return;
+  const q = state.deck[state.index];
+  const cat = CATEGORIES[q.cat];
+  const card = document.getElementById('game-card');
+
+  if (animate) {
+    card.style.animation = 'none';
+    card.offsetHeight;
+    card.style.animation = 'cardIn 0.4s cubic-bezier(0.4,0,0.2,1) forwards';
+  }
+
+  card.style.background = cat.bg;
+  document.getElementById('card-cat-dot').style.background = cat.color;
+  document.getElementById('card-cat-name').textContent = cat.name;
+  document.getElementById('card-question').textContent = q.text;
+  document.getElementById('game-counter').textContent = `${state.index + 1} / ${state.deck.length}`;
+
+  const badge = document.getElementById('card-player-badge');
+  if (state.players.length > 0) {
+    const name = state.players[state.playerIndex % state.players.length];
+    badge.textContent = name;
+    badge.classList.add('visible');
+  } else {
+    badge.textContent = '';
+    badge.classList.remove('visible');
+  }
+
+  const btnFav = document.getElementById('btn-fav');
+  const isFav = state.favorites.has(q.id);
+  btnFav.classList.toggle('favorited', isFav);
+  btnFav.textContent = isFav ? '♥' : '♡';
+
+  document.getElementById('btn-prev').disabled = state.index === 0;
+}
+
+function nextCard() {
+  if (state.index >= state.deck.length - 1) {
+    showToast('Toutes les cartes vues ! On mélange...');
+    state.deck = shuffle([...state.deck]);
+    state.index = 0;
+  } else {
+    state.index++;
+    state.playerIndex++;
+  }
+  renderCard(true);
+}
+
+function prevCard() {
+  if (state.index <= 0) { showToast('C\'est la première carte'); return; }
+  state.index--;
+  if (state.playerIndex > 0) state.playerIndex--;
+  renderCard(true);
+}
+
+function toggleFav() {
+  const q = state.deck[state.index];
+  if (state.favorites.has(q.id)) {
+    state.favorites.delete(q.id);
+    showToast('Retiré des favoris');
+  } else {
+    state.favorites.add(q.id);
+    showToast('Ajouté aux coups de cœur ♥');
+  }
+  saveFavs();
+  renderCard(false);
+}
+
+function shareCard() {
+  const q = state.deck[state.index];
+  const text = `EntreNous — ${CATEGORIES[q.cat].name}\n\n"${q.text}"\n\nDe vraies questions pour de vraies conversations.`;
+  if (navigator.share) navigator.share({ title: 'EntreNous', text });
+  else navigator.clipboard.writeText(text).then(() => showToast('Copié dans le presse-papiers'));
+}
+
+/* ── SWIPE ─────────────────────────────────────────────── */
+(function initSwipe() {
+  const area = document.getElementById('card-area');
+  const card = document.getElementById('game-card');
+  const hintL = document.getElementById('hint-left');
+  const hintR = document.getElementById('hint-right');
+
+  let startX = 0, startY = 0, dragging = false, axis = null, currentDx = 0;
+
+  function onStart(x, y) {
+    startX = x; startY = y; dragging = true; axis = null; currentDx = 0;
+    card.style.transition = 'none';
+    area.classList.add('dragging');
+  }
+
+  function onMove(x, y) {
+    if (!dragging) return;
+    const dx = x - startX;
+    const dy = y - startY;
+
+    if (!axis) {
+      if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
+        axis = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
+      }
+      return;
+    }
+    if (axis !== 'h') return;
+
+    currentDx = dx;
+    const rot = dx * 0.04;
+    const opacity = Math.max(0.55, 1 - Math.abs(dx) / 320);
+    card.style.transform = `translateX(${dx}px) rotate(${rot}deg)`;
+    card.style.opacity = opacity;
+
+    const hint = Math.abs(dx) > 30;
+    hintL.style.opacity = (dx > 30 && hint) ? Math.min(1, (dx - 30) / 60) : 0;
+    hintR.style.opacity = (dx < -30 && hint) ? Math.min(1, (-dx - 30) / 60) : 0;
+  }
+
+  function onEnd() {
+    if (!dragging) return;
+    dragging = false;
+    area.classList.remove('dragging');
+    hintL.style.opacity = 0;
+    hintR.style.opacity = 0;
+
+    if (axis !== 'h' || Math.abs(currentDx) < 75) {
+      card.style.transition = 'transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s';
+      card.style.transform = '';
+      card.style.opacity = '';
+      return;
+    }
+
+    const dir = currentDx < 0 ? 'left' : 'right';
+    const exitX = dir === 'left' ? -window.innerWidth * 1.3 : window.innerWidth * 1.3;
+    const rot   = dir === 'left' ? -18 : 18;
+
+    card.style.transition = 'transform 0.28s cubic-bezier(0.4,0,0.8,1), opacity 0.28s';
+    card.style.transform = `translateX(${exitX}px) rotate(${rot}deg)`;
+    card.style.opacity = '0';
+
+    setTimeout(() => {
+      card.style.transition = 'none';
+      card.style.transform = '';
+      card.style.opacity = '';
+      if (dir === 'left') nextCard();
+      else prevCard();
+    }, 280);
+  }
+
+  // Touch
+  area.addEventListener('touchstart', e => onStart(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+  area.addEventListener('touchmove',  e => { onMove(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+  area.addEventListener('touchend',   () => onEnd());
+
+  // Mouse
+  area.addEventListener('mousedown', e => { onStart(e.clientX, e.clientY); e.preventDefault(); });
+  window.addEventListener('mousemove', e => { if (dragging) onMove(e.clientX, e.clientY); });
+  window.addEventListener('mouseup',   () => { if (dragging) onEnd(); });
+})();
+
+/* ── FAVORITES ─────────────────────────────────────────── */
+function renderFavorites() {
+  const favs = QUESTIONS.filter(q => state.favorites.has(q.id));
+  document.getElementById('fav-count').textContent = favs.length;
+  document.getElementById('btn-play-favs').disabled = favs.length === 0;
+
+  const container = document.getElementById('fav-content');
+  if (favs.length === 0) {
+    container.innerHTML = `<div class="fav-empty"><div class="fav-empty-icon">♡</div><div>Tu n'as pas encore de coups de cœur.</div><div style="margin-top:8px;font-size:13px;color:var(--text-dim)">Appuie sur ♡ pendant une partie pour garder une carte.</div></div>`;
+    return;
+  }
+  container.innerHTML = `<div class="fav-grid">${favs.map(q => `
+    <div class="fav-card">
+      <div class="fav-card-bar" style="background:${CATEGORIES[q.cat].color}"></div>
+      <div class="fav-card-content">
+        <div class="fav-card-cat">${CATEGORIES[q.cat].name}</div>
+        <div class="fav-card-question">${q.text}</div>
+      </div>
+      <button class="fav-card-remove" onclick="removeFav(${q.id})">×</button>
+    </div>`).join('')}</div>`;
+}
+
+function removeFav(id) {
+  state.favorites.delete(id);
+  saveFavs();
+  renderFavorites();
+}
+
+function saveFavs() {
+  localStorage.setItem('en_favs', JSON.stringify([...state.favorites]));
+}
+
+/* ── UTILS ─────────────────────────────────────────────── */
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+let toastTimer;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
+}
+
+document.getElementById('player-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') addPlayer();
+});
+</script>
+</body>
+</html>
