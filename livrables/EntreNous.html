@@ -42,6 +42,12 @@
   --border: rgba(0,0,0,0.08);
   --border-hover: rgba(0,0,0,0.18);
 }
+:root[data-theme="light"] .logo {
+  background: linear-gradient(135deg, #3D1B6B 30%, #C4345A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 html { scroll-behavior: smooth; }
 
@@ -73,8 +79,8 @@ body {
   max-width: 600px; width: 100%;
 }
 
-.hero-logo { margin-bottom: 20px; }
-.hero-logo svg { width: 64px; height: 64px; }
+.hero-logo { margin-bottom: 24px; }
+.hero-logo svg { width: 120px; height: 144px; }
 
 .logo {
   font-family: 'Playfair Display', serif;
@@ -513,15 +519,22 @@ body {
 <div id="screen-landing" class="screen active">
   <div class="landing-hero">
     <div class="hero-logo">
-      <svg class="app-logo-svg" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="23" fill="url(#logoGrad1)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+      <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="logoGrad1" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#8B3FD4"/>
-            <stop offset="100%" stop-color="#C4345A"/>
-          </linearGradient>
+          <radialGradient id="sphereGradHero" cx="38%" cy="33%" r="62%">
+            <stop offset="0%" stop-color="#A78BFA"/>
+            <stop offset="55%" stop-color="#7C3AED"/>
+            <stop offset="100%" stop-color="#3B0764"/>
+          </radialGradient>
         </defs>
-        <text x="24" y="31" text-anchor="middle" font-family="Playfair Display, serif" font-size="18" font-weight="700" fill="white" letter-spacing="-0.5">EN</text>
+        <ellipse cx="100" cy="100" rx="88" ry="50" transform="rotate(-35 100 100)" stroke="#C4B5E8" stroke-width="1" opacity="0.55"/>
+        <ellipse cx="100" cy="100" rx="88" ry="50" stroke="#C4B5E8" stroke-width="1" opacity="0.45"/>
+        <ellipse cx="100" cy="100" rx="88" ry="50" transform="rotate(35 100 100)" stroke="#C4B5E8" stroke-width="1" opacity="0.55"/>
+        <circle cx="100" cy="100" r="54" fill="url(#sphereGradHero)"/>
+        <circle cx="100" cy="100" r="54" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+        <ellipse cx="82" cy="78" rx="20" ry="12" fill="rgba(255,255,255,0.14)" transform="rotate(-20 82 78)"/>
+        <text x="100" y="116" text-anchor="middle" font-family="Playfair Display, serif" font-style="italic" font-size="40" font-weight="400" fill="rgba(255,255,255,0.95)">en</text>
+        <text x="100" y="200" text-anchor="middle" font-family="Playfair Display, serif" font-size="19" font-weight="600" fill="#3D1B6B" letter-spacing="0.5">EntreNous</text>
       </svg>
     </div>
     <div class="logo">EntreNous</div>
@@ -661,9 +674,18 @@ body {
         <div class="card-question" id="card-question">La question apparaît ici</div>
         <div class="card-actions">
           <div class="card-logo-mark">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="16" cy="16" r="15" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-              <text x="16" y="21" text-anchor="middle" font-family="Playfair Display, serif" font-size="13" font-weight="700" fill="white">EN</text>
+            <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="sphereGradCard" cx="38%" cy="33%" r="62%">
+                  <stop offset="0%" stop-color="#A78BFA"/>
+                  <stop offset="55%" stop-color="#7C3AED"/>
+                  <stop offset="100%" stop-color="#3B0764"/>
+                </radialGradient>
+              </defs>
+              <circle cx="50" cy="50" r="48" fill="url(#sphereGradCard)"/>
+              <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+              <ellipse cx="38" cy="34" rx="14" ry="8" fill="rgba(255,255,255,0.13)" transform="rotate(-20 38 34)"/>
+              <text x="50" y="62" text-anchor="middle" font-family="Playfair Display, serif" font-style="italic" font-size="34" font-weight="400" fill="rgba(255,255,255,0.95)">en</text>
             </svg>
           </div>
           <div style="display:flex;gap:8px;">
@@ -768,8 +790,8 @@ const QUESTIONS = [
   {id:33, cat:'amour', text:"Tu as déjà aimé quelqu'un en silence ? Comment c'était ?"},
   {id:34, cat:'amour', text:"C'est quoi la chose la plus courageuse que tu aies faite par amour ?"},
   {id:35, cat:'amour', text:"Comment tu sais que tu es vraiment amoureux ?"},
-  {id:36, cat:'amour', text:"T'est-il déjà arrivé d'aimer deux personnes en même temps ?"},
-  {id:37, cat:'amour', text:"C'est quoi pour toi un deal-breaker absolu dans une relation ?"},
+  {id:36, cat:'amour', text:"Tu as déjà eu des sentiments pour deux personnes en même temps ?"},
+  {id:37, cat:'amour', text:"C'est quoi pour toi un truc absolument rédhibitoire dans une relation ?"},
   {id:38, cat:'amour', text:"Tu as déjà été brisé par quelqu'un ? Comment tu t'en es remis ?"},
   {id:39, cat:'amour', text:"C'est quoi la différence entre l'amour et l'attachement ?"},
   {id:40, cat:'amour', text:"Est-ce qu'on peut aimer quelqu'un et ne pas lui faire confiance ?"},
@@ -833,7 +855,7 @@ const QUESTIONS = [
   {id:110,cat:'passe', text:"C'est quoi la version de toi dont tu es le moins fier ?"},
 
   // ── Futur ─────────────────────────────────────────
-  {id:120,cat:'futur', text:"Où tu te vois dans 10 ans ?"},
+  {id:120,cat:'futur', text:"Où est-ce que tu te vois dans 10 ans ?"},
   {id:121,cat:'futur', text:"C'est quoi ta plus grande peur pour l'avenir ?"},
   {id:122,cat:'futur', text:"Si tu pouvais garantir une seule chose pour ton futur, ce serait quoi ?"},
   {id:123,cat:'futur', text:"C'est quoi le projet dont tu parles depuis longtemps mais que tu n'as pas lancé ?"},
@@ -852,7 +874,7 @@ const QUESTIONS = [
   {id:136,cat:'futur', text:"Si tu devais choisir un pays pour vivre le reste de ta vie, ce serait lequel ?"},
   {id:137,cat:'futur', text:"Tu as peur de vieillir ? Pourquoi ?"},
   {id:138,cat:'futur', text:"C'est quoi la chose que tu feras dès demain si tu te promets de la faire vraiment ?"},
-  {id:139,cat:'futur', text:"Tu te vois vivre seul ou avec quelqu'un dans 10 ans ?"},
+  {id:139,cat:'futur', text:"Est-ce que tu te vois vivre seul ou avec quelqu'un dans 10 ans ?"},
   {id:140,cat:'futur', text:"C'est quoi le rêve que tu n'as encore dit à personne ?"},
 
   // ── Intime ────────────────────────────────────────
@@ -913,11 +935,11 @@ const QUESTIONS = [
   {id:218,cat:'societe', text:"Tu te sens concerné par ce qui se passe dans le monde ou tu préfères t'en détacher ?"},
   {id:219,cat:'societe', text:"C'est quoi une norme sociale que tu trouves absurde ?"},
   {id:220,cat:'societe', text:"Tu penses qu'il est encore possible de changer les choses à grande échelle ?"},
-  {id:221,cat:'societe', text:"Internet a changé ta façon de penser. Dans quel sens ?"},
+  {id:221,cat:'societe', text:"Internet a changé ta façon de penser ? Dans quel sens ?"},
   {id:222,cat:'societe', text:"C'est quoi un privilège que tu as et dont tu ne te rends pas toujours compte ?"},
   {id:223,cat:'societe', text:"Tu penses qu'on vit mieux ou moins bien que la génération de nos parents ?"},
   {id:224,cat:'societe', text:"C'est quoi une valeur que la société actuelle perd selon toi ?"},
-  {id:225,cat:'societe', text:"Tu fais confiance aux institutions — gouvernement, justice, médias ?"},
+  {id:225,cat:'societe', text:"Tu fais confiance aux institutions : gouvernement, justice, médias ?"},
   {id:226,cat:'societe', text:"C'est quoi le combat de ta génération ?"},
   {id:227,cat:'societe', text:"Tu penses que l'intelligence artificielle va changer ta vie ? Comment ?"},
   {id:228,cat:'societe', text:"C'est quoi une chose que ta culture t'a apprise que tu n'aurais pas voulu apprendre ?"},
@@ -933,14 +955,14 @@ const QUESTIONS = [
   {id:305,cat:'amour',     spicy:true, text:"C'est quoi ton type physique idéal, sans filtre ?"},
   {id:306,cat:'intime',    spicy:true, text:"Tu as déjà envoyé ou reçu des photos compromettantes ?"},
   {id:307,cat:'amour',     spicy:true, text:"C'est quoi le truc qui t'attire le plus chez quelqu'un physiquement ?"},
-  {id:308,cat:'entrenous', spicy:true, text:"Tu as déjà eu un crush sur quelqu'un dans ce groupe ?"},
+  {id:308,cat:'entrenous', spicy:true, text:"Tu as déjà craqué pour quelqu'un dans ce groupe ?"},
   {id:309,cat:'entrenous', spicy:true, text:"Tu as déjà embrassé ou voulu embrasser quelqu'un ici ?"},
   {id:310,cat:'intime',    spicy:true, text:"C'est quoi ta plus grande curiosité sexuelle que tu n'as pas encore explorée ?"},
   {id:311,cat:'amour',     spicy:true, text:"C'est quoi la chose la plus osée que tu voudrais qu'on te fasse ?"},
   {id:312,cat:'intime',    spicy:true, text:"C'est quoi le lieu le plus inhabituel où tu as déjà fait quelque chose d'osé ?"},
   {id:313,cat:'intime',    spicy:true, text:"Tu as déjà joué un rôle dans une situation intime ?"},
-  {id:314,cat:'amour',     spicy:true, text:"C'est quoi ton red flag qui t'attire malgré toi ?"},
-  {id:315,cat:'intime',    spicy:true, text:"Tu as déjà sexté ? C'était bien ?"},
+  {id:314,cat:'amour',     spicy:true, text:"C'est quoi le défaut chez quelqu'un qui t'attire malgré toi ?"},
+  {id:315,cat:'intime',    spicy:true, text:"Tu as déjà échangé des messages à caractère sexuel ? C'était bien ?"},
   {id:316,cat:'amour',     spicy:true, text:"C'est quoi la chose la plus dingue que tu ferais pour séduire quelqu'un qui te plaît vraiment ?"},
   {id:317,cat:'intime',    spicy:true, text:"Tu préfères l'amour physique intense et court ou tendre et long ?"},
   {id:318,cat:'amour',     spicy:true, text:"C'est quoi le baiser dont tu te souviens le plus ?"},
@@ -953,7 +975,7 @@ const QUESTIONS = [
 
   // ── Mode -18 (jeunes 12-17 ans) ───────────────────
   {id:400,cat:'philo',   jeune:true, text:"C'est quoi ton rêve le plus grand que tu n'as dit à personne ?"},
-  {id:401,cat:'societe', jeune:true, text:"Il y a un truc à l'école que tu trouves vraiment inutile. Lequel ?"},
+  {id:401,cat:'societe', jeune:true, text:"Il y a un truc à l'école que tu trouves vraiment inutile ? Lequel ?"},
   {id:402,cat:'philo',   jeune:true, text:"Tu te sens plus toi-même avec qui ?"},
   {id:403,cat:'passe',   jeune:true, text:"C'est quoi la chose qui t'a le plus changé cette année ?"},
   {id:404,cat:'societe', jeune:true, text:"Tu penses souvent à ce que les autres pensent de toi ?"},
@@ -975,7 +997,7 @@ const QUESTIONS = [
   {id:420,cat:'philo',   jeune:true, text:"Est-ce que tu penses que tu es quelqu'un de courageux ? Donne un exemple."},
   {id:421,cat:'passe',   jeune:true, text:"C'est quoi quelque chose que tu as fait dont tu es fier mais que tu n'as jamais dit à personne ?"},
   {id:422,cat:'societe', jeune:true, text:"C'est quoi un problème du monde qui te touche vraiment, personnellement ?"},
-  {id:423,cat:'drole',   jeune:true, text:"C'est quoi la situation la plus awkward que tu aies vécue avec quelqu'un que tu kiffes ?"},
+  {id:423,cat:'drole',   jeune:true, text:"C'est quoi la situation la plus embarrassante que tu aies vécue avec quelqu'un que tu kiffes ?"},
   {id:424,cat:'futur',   jeune:true, text:"Tu imagines ta vie comment à 30 ans ? Famille, travail, endroit ?"},
   {id:425,cat:'philo',   jeune:true, text:"C'est quoi quelque chose que tu croyais fort quand tu étais petit et que tu ne crois plus ?"},
   {id:426,cat:'passe',   jeune:true, text:"C'est quoi un moment où tu t'es senti vraiment incompris ?"},
