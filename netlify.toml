@@ -1,0 +1,7 @@
+[build]
+  publish = "livrables"
+
+[[redirects]]
+  from = "/"
+  to = "/EntreNous.html"
+  status = 200
