@@ -1,0 +1,227 @@
+id,cat,text,spicy,jeune
+1,"philo","Si tu pouvais changer une seule chose dans le monde, ce serait quoi ?",false,false
+2,"philo","Est-ce que tu crois que tout arrive pour une raison ?",false,false
+3,"philo","C'est quoi pour toi la définition du bonheur ?",false,false
+4,"philo","Tu préfères avoir raison ou être heureux ?",false,false
+5,"philo","Si tu pouvais vivre éternellement, est-ce que tu le ferais ? Pourquoi ?",false,false
+6,"philo","C'est quoi la chose la plus précieuse que l'argent ne peut pas acheter ?",false,false
+7,"philo","Est-ce que l'être humain est fondamentalement bon ou mauvais selon toi ?",false,false
+8,"philo","C'est quoi le sens de la vie pour toi ?",false,false
+9,"philo","Si tu devais choisir entre la liberté totale et la sécurité totale, tu choisirais quoi ?",false,false
+10,"philo","C'est quoi pour toi la différence entre vivre et exister ?",false,false
+11,"philo","Est-ce que tu crois en quelque chose de plus grand que toi ?",false,false
+12,"philo","Si tu pouvais connaître la date de ta mort, tu voudrais le savoir ?",false,false
+13,"philo","C'est quoi une vérité que tout le monde connaît mais que personne ne dit à voix haute ?",false,false
+14,"philo","Le destin existe ou tout est un choix ?",false,false
+15,"philo","C'est quoi l'expérience qui t'a le plus transformé ?",false,false
+16,"philo","Si tu pouvais effacer un souvenir douloureux, est-ce que tu le ferais ?",false,false
+17,"philo","C'est quoi la différence entre être seul et se sentir seul ?",false,false
+18,"philo","Tu penses qu'on peut vraiment changer qui on est au fond ?",false,false
+19,"philo","C'est quoi ta plus grande vérité sur toi-même que tu as du mal à accepter ?",false,false
+20,"philo","Est-ce que tu penses que les gens naissent avec un caractère ou qu'ils le construisent ?",false,false
+21,"philo","Si tu devais expliquer ce qu'est l'amour à quelqu'un qui ne l'a jamais ressenti, tu dirais quoi ?",false,false
+22,"philo","C'est quoi pour toi la plus belle forme de courage ?",false,false
+30,"amour","C'est quoi pour toi le vrai amour ?",false,false
+31,"amour","Tu crois à l'âme sœur ?",false,false
+32,"amour","Qu'est-ce que tu recherches vraiment chez un partenaire ?",false,false
+33,"amour","Tu as déjà aimé quelqu'un en silence ? Comment c'était ?",false,false
+34,"amour","C'est quoi la chose la plus courageuse que tu aies faite par amour ?",false,false
+35,"amour","Comment tu sais que tu es vraiment amoureux ?",false,false
+36,"amour","T'est-il déjà arrivé d'aimer deux personnes en même temps ?",false,false
+37,"amour","C'est quoi pour toi un deal-breaker absolu dans une relation ?",false,false
+38,"amour","Tu as déjà été brisé par quelqu'un ? Comment tu t'en es remis ?",false,false
+39,"amour","C'est quoi la différence entre l'amour et l'attachement ?",false,false
+40,"amour","Est-ce qu'on peut aimer quelqu'un et ne pas lui faire confiance ?",false,false
+41,"amour","C'est quoi la chose la plus romantique qu'on t'ait jamais faite ?",false,false
+42,"amour","Est-ce que tu penses que l'amour peut durer toute une vie ?",false,false
+43,"amour","Tu as déjà choisi quelqu'un par peur d'être seul ?",false,false
+44,"amour","C'est quoi la leçon la plus dure qu'une relation t'a apprise ?",false,false
+45,"amour","Si tu pouvais revivre un moment avec quelqu'un que tu as aimé, lequel ce serait ?",false,false
+46,"amour","C'est quoi la chose dont tu as besoin dans une relation mais que tu n'oses pas demander ?",false,false
+47,"amour","Tu aimes plus ou tu te laisses aimer ?",false,false
+48,"amour","C'est quoi le plus beau geste d'amour que tu aies jamais reçu ?",false,false
+49,"amour","Tu as déjà eu des sentiments pour quelqu'un qui était en couple ?",false,false
+50,"amour","C'est quoi pour toi la différence entre tomber amoureux et rester amoureux ?",false,false
+51,"amour","Tu penses qu'un ex peut vraiment rester un ami ?",false,false
+60,"drole","Si ta vie était un film, quel serait le titre et le genre ?",false,false
+61,"drole","C'est quoi le truc le plus gênant qui t'est arrivé ?",false,false
+62,"drole","Tu as déjà fait semblant d'aimer un cadeau ? Raconte.",false,false
+63,"drole","C'est quoi ton talent caché le plus inutile ?",false,false
+64,"drole","Si tu étais un emoji, lequel tu serais et pourquoi ?",false,false
+65,"drole","C'est quoi la chose la plus stupide que tu aies faite pour faire rire quelqu'un ?",false,false
+66,"drole","Quelle est la rumeur la plus bizarre qui a circulé sur toi ?",false,false
+67,"drole","Si tu pouvais avoir un super-pouvoir complètement inutile, lequel ce serait ?",false,false
+68,"drole","C'est quoi ton obsession secrète et totalement illogique ?",false,false
+69,"drole","Tu as déjà envoyé un message au mauvais destinataire ? Raconte.",false,false
+70,"drole","C'est quoi la peur la plus irrationnelle que tu aies ?",false,false
+71,"drole","Si tu devais vivre dans une série TV, laquelle tu choisirais ?",false,false
+72,"drole","C'est quoi ton excuse la plus créative pour te défiler de quelque chose ?",false,false
+73,"drole","Tu as déjà menti sur quelque chose de complètement ridicule ?",false,false
+74,"drole","C'est quoi le truc le plus enfantin que tu fasses encore ?",false,false
+75,"drole","Tu as déjà parlé à toi-même à voix haute en public par accident ?",false,false
+76,"drole","C'est quoi ton habitude la plus bizarre que tu n'avoues généralement pas ?",false,false
+77,"drole","Si tu avais un million d'euros à dépenser en 24h de manière stupide, tu ferais quoi ?",false,false
+78,"drole","C'est quoi la chanson que tu chantes sous la douche en ce moment ?",false,false
+79,"drole","Tu as déjà fait un truc complètement hors de ton personnage ? Raconte.",false,false
+80,"drole","Si tu devais choisir un animal pour te représenter, ce serait lequel et pourquoi ?",false,false
+81,"drole","C'est quoi le truc le plus absurde dont tu t'es déjà énervé ?",false,false
+90,"passe","C'est quoi le souvenir d'enfance qui te fait encore sourire ?",false,false
+91,"passe","Tu as un regret que tu portes encore ?",false,false
+92,"passe","Quelle période de ta vie tu revivrais si tu pouvais ?",false,false
+93,"passe","C'est quoi la décision passée qui a le plus changé ta vie ?",false,false
+94,"passe","Qui t'a le plus marqué dans ton enfance ?",false,false
+95,"passe","C'est quoi la chose que la version de toi d'il y a 5 ans ne comprendrait pas aujourd'hui ?",false,false
+96,"passe","Il y a un moment de ta vie que tu aurais aimé vivre autrement ?",false,false
+97,"passe","C'est quoi la chose dont tu es le plus fier dans ton passé ?",false,false
+98,"passe","Tu as déjà fait quelque chose dont tu n'es pas fier mais que tu referais quand même ?",false,false
+99,"passe","C'est quoi le moment où tu as réalisé que tu avais vraiment grandi ?",false,false
+100,"passe","Il y a une personne de ton passé que tu aimerais retrouver ?",false,false
+101,"passe","C'est quoi la meilleure décision que tu aies jamais prise ?",false,false
+102,"passe","C'est quoi le moment où tu as compris ce qui comptait vraiment pour toi ?",false,false
+103,"passe","Qu'est-ce que tu dirais à une version plus jeune de toi si tu pouvais ?",false,false
+104,"passe","C'est quoi l'obstacle que tu es le plus fier d'avoir surmonté ?",false,false
+105,"passe","Tu as déjà tout quitté pour quelque chose ou quelqu'un ?",false,false
+106,"passe","C'est quoi la chose du passé qui influence encore le plus ta façon d'agir aujourd'hui ?",false,false
+107,"passe","Il y a une erreur passée qui t'a finalement mené quelque part de bien ?",false,false
+108,"passe","C'est quoi la période la plus difficile de ta vie et comment tu l'as traversée ?",false,false
+109,"passe","Tu as déjà renoncé à quelque chose d'important ? Tu le regrettes ?",false,false
+110,"passe","C'est quoi la version de toi dont tu es le moins fier ?",false,false
+120,"futur","Où tu te vois dans 10 ans ?",false,false
+121,"futur","C'est quoi ta plus grande peur pour l'avenir ?",false,false
+122,"futur","Si tu pouvais garantir une seule chose pour ton futur, ce serait quoi ?",false,false
+123,"futur","C'est quoi le projet dont tu parles depuis longtemps mais que tu n'as pas lancé ?",false,false
+124,"futur","Dans 20 ans, qu'est-ce que tu veux que les gens disent de toi ?",false,false
+125,"futur","Si tu ne pouvais pas échouer, qu'est-ce que tu essaierais de faire ?",false,false
+126,"futur","Tu veux des enfants ? Pourquoi ?",false,false
+127,"futur","C'est quoi le truc que tu regrettes de ne pas avoir commencé plus tôt ?",false,false
+128,"futur","Si tu savais que tu allais mourir dans un an, qu'est-ce que tu ferais différemment ?",false,false
+129,"futur","C'est quoi ton objectif le plus ambitieux ?",false,false
+130,"futur","Tu as une vision claire de ce que tu veux ou tu avances un peu à l'aveugle ?",false,false
+131,"futur","C'est quoi la chose que tu t'interdis de vouloir parce que tu penses que c'est hors de portée ?",false,false
+132,"futur","Si tu pouvais changer de vie du jour au lendemain, tu le ferais ?",false,false
+133,"futur","C'est quoi ta définition du succès ?",false,false
+134,"futur","Tu penses que tu seras plus heureux dans 10 ans qu'aujourd'hui ?",false,false
+135,"futur","C'est quoi la compétence que tu veux absolument acquérir ?",false,false
+136,"futur","Si tu devais choisir un pays pour vivre le reste de ta vie, ce serait lequel ?",false,false
+137,"futur","Tu as peur de vieillir ? Pourquoi ?",false,false
+138,"futur","C'est quoi la chose que tu feras dès demain si tu te promets de la faire vraiment ?",false,false
+139,"futur","Tu te vois vivre seul ou avec quelqu'un dans 10 ans ?",false,false
+140,"futur","C'est quoi le rêve que tu n'as encore dit à personne ?",false,false
+150,"intime","C'est quoi ta plus grande insécurité ?",false,false
+151,"intime","Tu te sens vraiment compris par les gens qui t'entourent ?",false,false
+152,"intime","Qu'est-ce que les gens pensent de toi qui est complètement faux ?",false,false
+153,"intime","Tu as déjà eu une pensée que tu n'oserais jamais dire à voix haute ?",false,false
+154,"intime","C'est quoi la chose dont tu as le plus honte dans ta vie ?",false,false
+155,"intime","Si les gens pouvaient voir à l'intérieur de toi, qu'est-ce qui les surprendrait le plus ?",false,false
+156,"intime","Tu te parles comment quand tu es seul avec toi-même ?",false,false
+157,"intime","C'est quoi la chose que tu voudrais que les autres comprennent sur toi sans que tu aies à l'expliquer ?",false,false
+158,"intime","Tu as déjà eu envie de tout laisser tomber ? Qu'est-ce qui t'a retenu ?",false,false
+159,"intime","C'est quoi le masque que tu portes le plus souvent ?",false,false
+160,"intime","Tu as une facette de toi que tu caches même à tes proches ?",false,false
+161,"intime","C'est quoi le compliment qui t'a le plus touché dans ta vie ?",false,false
+162,"intime","Tu as déjà eu honte d'une partie de ton identité ?",false,false
+163,"intime","C'est quoi la chose que tu fais pour te sentir bien quand tu vas vraiment mal ?",false,false
+164,"intime","Tu te considères comme quelqu'un de bien ? Pourquoi ?",false,false
+165,"intime","C'est quoi la chose que tu acceptes difficilement chez toi ?",false,false
+166,"intime","Tu as peur de quoi au fond ?",false,false
+167,"intime","C'est quoi le moment où tu t'es senti le plus seul ?",false,false
+168,"intime","Tu te sens à ta place dans ta vie en ce moment ?",false,false
+169,"intime","C'est quoi quelque chose que tu t'es promis et que tu n'as pas tenu ?",false,false
+170,"intime","Est-ce que tu te fais confiance ?",false,false
+180,"entrenous","C'est quoi la première chose que tu as pensé de moi quand on s'est rencontrés ?",false,false
+181,"entrenous","Il y a quelque chose que tu voudrais me dire mais que tu n'as jamais osé ?",false,false
+182,"entrenous","Tu penses qu'on se connaît vraiment ?",false,false
+183,"entrenous","C'est quoi la chose que tu apprécies le plus en moi ?",false,false
+184,"entrenous","C'est quoi un moment où j'ai changé ta façon de voir les choses ?",false,false
+185,"entrenous","Si tu devais décrire notre relation en un seul mot, ce serait lequel ?",false,false
+186,"entrenous","C'est quoi quelque chose que tu aurais aimé me dire il y a longtemps ?",false,false
+187,"entrenous","Il y a un malentendu entre nous que tu n'as jamais vraiment résolu ?",false,false
+188,"entrenous","C'est quoi la chose que tu aimes le moins chez moi mais que tu acceptes quand même ?",false,false
+189,"entrenous","Tu as déjà eu peur de me perdre ?",false,false
+190,"entrenous","C'est quoi le moment où tu as réalisé qu'on avait une vraie connexion ?",false,false
+191,"entrenous","Il y a quelque chose que tu fais différemment depuis qu'on se connaît ?",false,false
+192,"entrenous","C'est quoi le souvenir qui te fait sourire quand tu penses à nous ?",false,false
+193,"entrenous","Si tu devais me présenter à quelqu'un, qu'est-ce que tu dirais de moi ?",false,false
+194,"entrenous","Tu penses que je suis tel que je me présente ou tu vois quelque chose que les autres ne voient pas ?",false,false
+195,"entrenous","C'est quoi la conversation qu'on n'a jamais eue et qu'on devrait avoir ?",false,false
+196,"entrenous","Si tu pouvais me donner un seul conseil, ce serait lequel ?",false,false
+197,"entrenous","Tu m'as déjà jugé sans me le dire ?",false,false
+198,"entrenous","C'est quoi la chose que tu ferais différemment dans notre relation si tu pouvais ?",false,false
+199,"entrenous","Est-ce que tu penses qu'on se ressemble plus qu'on ne le montre ?",false,false
+200,"entrenous","C'est quoi quelque chose que tu n'as dit à personne d'autre qu'à moi ?",false,false
+210,"societe","C'est quoi le plus grand problème de notre génération ?",false,false
+211,"societe","Tu penses que les réseaux sociaux font plus de bien que de mal ?",false,false
+212,"societe","C'est quoi une opinion impopulaire que tu assumes pleinement ?",false,false
+213,"societe","Tu te sens libre dans la société dans laquelle tu vis ?",false,false
+214,"societe","C'est quoi une injustice qui t'énerve vraiment ?",false,false
+215,"societe","Si tu étais au pouvoir demain, quelle serait ta première décision ?",false,false
+216,"societe","C'est quoi un sujet dont on ne parle pas assez ?",false,false
+217,"societe","Tu penses que les médias nous montrent la réalité ?",false,false
+218,"societe","Tu te sens concerné par ce qui se passe dans le monde ou tu préfères t'en détacher ?",false,false
+219,"societe","C'est quoi une norme sociale que tu trouves absurde ?",false,false
+220,"societe","Tu penses qu'il est encore possible de changer les choses à grande échelle ?",false,false
+221,"societe","Internet a changé ta façon de penser. Dans quel sens ?",false,false
+222,"societe","C'est quoi un privilège que tu as et dont tu ne te rends pas toujours compte ?",false,false
+223,"societe","Tu penses qu'on vit mieux ou moins bien que la génération de nos parents ?",false,false
+224,"societe","C'est quoi une valeur que la société actuelle perd selon toi ?",false,false
+225,"societe","Tu fais confiance aux institutions — gouvernement, justice, médias ?",false,false
+226,"societe","C'est quoi le combat de ta génération ?",false,false
+227,"societe","Tu penses que l'intelligence artificielle va changer ta vie ? Comment ?",false,false
+228,"societe","C'est quoi une chose que ta culture t'a apprise que tu n'aurais pas voulu apprendre ?",false,false
+229,"societe","Est-ce qu'on a le droit de juger les choix de vie des autres ?",false,false
+230,"societe","C'est quoi quelque chose que notre société fait vraiment bien ?",false,false
+300,"amour","C'est quoi ta position sexuelle préférée ?",true,false
+301,"intime","Tu préfères être dominant ou soumis ?",true,false
+302,"intime","C'est quoi ton fantasme que tu n'as jamais réalisé et que tu aimerais réaliser ?",true,false
+303,"intime","Tu as déjà fait quelque chose d'osé dans un lieu public ?",true,false
+304,"intime","C'est quoi la chose la plus folle que tu aies faite sexuellement ?",true,false
+305,"amour","C'est quoi ton type physique idéal, sans filtre ?",true,false
+306,"intime","Tu as déjà envoyé ou reçu des photos compromettantes ?",true,false
+307,"amour","C'est quoi le truc qui t'attire le plus chez quelqu'un physiquement ?",true,false
+308,"entrenous","Tu as déjà eu un crush sur quelqu'un dans ce groupe ?",true,false
+309,"entrenous","Tu as déjà embrassé ou voulu embrasser quelqu'un ici ?",true,false
+310,"intime","C'est quoi ta plus grande curiosité sexuelle que tu n'as pas encore explorée ?",true,false
+311,"amour","C'est quoi la chose la plus osée que tu voudrais qu'on te fasse ?",true,false
+312,"intime","C'est quoi le lieu le plus inhabituel où tu as déjà fait quelque chose d'osé ?",true,false
+313,"intime","Tu as déjà joué un rôle dans une situation intime ?",true,false
+314,"amour","C'est quoi ton red flag qui t'attire malgré toi ?",true,false
+315,"intime","Tu as déjà sexté ? C'était bien ?",true,false
+316,"amour","C'est quoi la chose la plus dingue que tu ferais pour séduire quelqu'un qui te plaît vraiment ?",true,false
+317,"intime","Tu préfères l'amour physique intense et court ou tendre et long ?",true,false
+318,"amour","C'est quoi le baiser dont tu te souviens le plus ?",true,false
+319,"intime","Tu as déjà attiré quelqu'un sans le vouloir ? Comment tu l'as géré ?",true,false
+320,"entrenous","Si tu devais embrasser quelqu'un dans ce groupe, ce serait qui ?",true,false
+321,"amour","Tu préfères être séduit ou séduire ?",true,false
+322,"intime","C'est quoi la chose la plus sexy que quelqu'un puisse faire sans s'en rendre compte ?",true,false
+323,"amour","Tu as déjà été dans une situation de tension sexuelle avec quelqu'un dans ton entourage proche ?",true,false
+324,"intime","C'est quoi quelque chose que tu aimes dans l'intimité mais que tu n'avoues généralement pas ?",true,false
+400,"philo","C'est quoi ton rêve le plus grand que tu n'as dit à personne ?",false,true
+401,"societe","Il y a un truc à l'école que tu trouves vraiment inutile. Lequel ?",false,true
+402,"philo","Tu te sens plus toi-même avec qui ?",false,true
+403,"passe","C'est quoi la chose qui t'a le plus changé cette année ?",false,true
+404,"societe","Tu penses souvent à ce que les autres pensent de toi ?",false,true
+405,"futur","Si tu pouvais faire un seul métier toute ta vie, ce serait lequel ?",false,true
+406,"philo","C'est quoi la différence entre un ami et un vrai ami selon toi ?",false,true
+407,"drole","C'est quoi le truc le plus gênant que tu aies fait devant tes parents ?",false,true
+408,"societe","Est-ce que tu penses que les adultes comprennent vraiment ce que vivent les jeunes ?",false,true
+409,"futur","Dans 5 ans, tu veux être où et faire quoi ?",false,true
+410,"passe","C'est quoi ton meilleur souvenir avec tes amis ?",false,true
+411,"philo","Tu trouves qu'il est difficile d'être toi-même au quotidien ? Pourquoi ?",false,true
+412,"societe","Les réseaux sociaux te font te sentir comment en général ?",false,true
+413,"drole","C'est quoi le mensonge le plus incroyable que tu aies dit à un prof ?",false,true
+414,"futur","C'est quoi quelque chose que tu veux absolument faire avant tes 20 ans ?",false,true
+415,"philo","Tu penses que l'amitié peut durer toute une vie ou les gens changent trop ?",false,true
+416,"passe","Il y a une période de ta vie où tu étais vraiment heureux. C'était quand ?",false,true
+417,"societe","C'est quoi quelque chose que tu voudrais que ta famille comprenne mieux de toi ?",false,true
+418,"drole","Tu as déjà fait semblant d'être malade pour rater l'école ? Comment ça s'est passé ?",false,true
+419,"futur","C'est quoi ta plus grande peur pour ton avenir ?",false,true
+420,"philo","Est-ce que tu penses que tu es quelqu'un de courageux ? Donne un exemple.",false,true
+421,"passe","C'est quoi quelque chose que tu as fait dont tu es fier mais que tu n'as jamais dit à personne ?",false,true
+422,"societe","C'est quoi un problème du monde qui te touche vraiment, personnellement ?",false,true
+423,"drole","C'est quoi la situation la plus awkward que tu aies vécue avec quelqu'un que tu kiffes ?",false,true
+424,"futur","Tu imagines ta vie comment à 30 ans ? Famille, travail, endroit ?",false,true
+425,"philo","C'est quoi quelque chose que tu croyais fort quand tu étais petit et que tu ne crois plus ?",false,true
+426,"passe","C'est quoi un moment où tu t'es senti vraiment incompris ?",false,true
+427,"societe","Si tu pouvais changer une règle à l'école ou à la maison, ce serait laquelle ?",false,true
+428,"drole","C'est quoi le défi ou le pari le plus idiot que tu aies accepté ?",false,true
+429,"futur","C'est quoi quelque chose que tu veux accomplir que personne dans ta famille n'a fait avant toi ?",false,true
