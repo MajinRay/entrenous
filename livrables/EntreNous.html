@@ -702,7 +702,7 @@ body {
 .wheel-overlay-card {
   background: var(--bg2); border: 1px solid var(--border-hover);
   border-radius: 24px; padding: 32px 24px; max-width: 380px; width: 100%;
-  text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+  text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 60px rgba(168,85,247,0.08);
   position: relative;
 }
 .wheel-overlay-title {
@@ -713,7 +713,8 @@ body {
   font-size: 24px; color: #A855F7; line-height: 1;
   margin-bottom: -8px; display: block;
 }
-#wheel-canvas { border-radius: 50%; display: block; margin: 0 auto 8px; }
+#wheel-canvas { border-radius: 50%; display: block; margin: 0 auto 8px; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5)); }
+#wheel-preview { border-radius: 50%; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }
 .wheel-result { padding-top: 20px; animation: fadeInUp 0.4s ease; }
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(12px); }
@@ -752,6 +753,36 @@ body {
   box-shadow: 0 4px 16px rgba(220,38,38,0.3);
 }
 .btn-skip:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(220,38,38,0.45); }
+
+/* ── BOUTONS COMPÉTITION IN-CARD ──────────────── */
+.card-comp-actions {
+  display: flex; gap: 10px; margin-top: auto;
+}
+.card-btn-comp {
+  flex: 1; padding: 13px 8px; border: none; cursor: pointer;
+  border-radius: 14px; font-family: 'Inter', sans-serif;
+  font-size: 14px; font-weight: 600; color: #fff;
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+  backdrop-filter: blur(8px);
+}
+.card-btn-comp.card-btn-answered {
+  background: linear-gradient(135deg, rgba(22,163,74,0.75), rgba(21,128,61,0.65));
+  border: 1px solid rgba(22,163,74,0.35);
+  box-shadow: 0 4px 14px rgba(22,163,74,0.2);
+}
+.card-btn-comp.card-btn-answered:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(22,163,74,0.35);
+}
+.card-btn-comp.card-btn-skip {
+  background: linear-gradient(135deg, rgba(234,88,12,0.75), rgba(194,65,12,0.65));
+  border: 1px solid rgba(234,88,12,0.35);
+  box-shadow: 0 4px 14px rgba(234,88,12,0.2);
+}
+.card-btn-comp.card-btn-skip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(234,88,12,0.35);
+}
 </style>
 </head>
 <body>
@@ -993,7 +1024,7 @@ body {
           <div class="card-player-badge" id="card-player-badge"></div>
         </div>
         <div class="card-question" id="card-question">La question apparaît ici</div>
-        <div class="card-actions">
+        <div class="card-actions" id="card-normal-actions">
           <div class="card-logo-mark">
             <svg width="22" height="30" viewBox="0 0 56 76" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -1012,6 +1043,10 @@ body {
             <button class="card-btn" id="btn-share" onclick="shareCard()">⬆</button>
             <button class="card-btn" id="btn-fav" onclick="toggleFav()">♡</button>
           </div>
+        </div>
+        <div class="card-comp-actions" id="card-comp-actions" style="display:none">
+          <button class="card-btn-comp card-btn-answered" onclick="nextCard()">✅ Répondu</button>
+          <button class="card-btn-comp card-btn-skip" onclick="skipCard()">⏭ Skip</button>
         </div>
       </div>
     </div>
@@ -1839,32 +1874,37 @@ function renderCard(animate = false) {
   document.getElementById('card-question').textContent = q.text;
   document.getElementById('game-counter').textContent = `${state.index + 1} / ${state.deck.length}`;
 
-  // Bannière joueur et boutons selon mode de jeu
   const isComp = state.playMode === 'competition' && state.players.length > 0;
   const banner = document.getElementById('player-banner');
   const compActions = document.getElementById('comp-game-actions');
   const navRow = document.getElementById('game-nav-row');
+  const badge = document.getElementById('card-player-badge');
 
   if (isComp) {
     const playerName = state.players[state.playerIndex % state.players.length];
-    banner.textContent = `👤 Tour de ${playerName}`;
-    banner.style.display = 'block';
-    compActions.style.display = 'flex';
-    navRow.style.display = 'none';
-  } else {
+    // Nom du joueur dans le badge (top-right de la carte)
+    badge.textContent = `👤 ${playerName}`;
+    badge.classList.add('visible');
+    // Boutons Répondu/Skip dans la carte
+    document.getElementById('card-comp-actions').style.display = 'flex';
+    document.getElementById('card-normal-actions').style.display = 'none';
+    // Éléments externes masqués
     banner.style.display = 'none';
     compActions.style.display = 'none';
-    navRow.style.display = 'flex';
-  }
-
-  const badge = document.getElementById('card-player-badge');
-  if (state.players.length > 0 && !isComp) {
-    const name = state.players[state.playerIndex % state.players.length];
-    badge.textContent = name;
-    badge.classList.add('visible');
+    navRow.style.display = 'none';
   } else {
     badge.textContent = '';
     badge.classList.remove('visible');
+    document.getElementById('card-comp-actions').style.display = 'none';
+    document.getElementById('card-normal-actions').style.display = 'flex';
+    banner.style.display = 'none';
+    compActions.style.display = 'none';
+    navRow.style.display = 'flex';
+    if (state.players.length > 0) {
+      const name = state.players[state.playerIndex % state.players.length];
+      badge.textContent = name;
+      badge.classList.add('visible');
+    }
   }
 
   const btnFav = document.getElementById('btn-fav');
@@ -2125,6 +2165,17 @@ function chooseCompMode() {
   state.forfeits = [];
   state.players = [];
   state.wheelAngle = 0;
+  // Reset visuel complet (les relances successives ne doivent pas hériter de l'état précédent)
+  document.getElementById('comp-players-list').innerHTML = '';
+  document.getElementById('btn-comp-next-1').disabled = true;
+  document.getElementById('comp-player-input').value = '';
+  document.getElementById('forfeit-input').value = '';
+  document.getElementById('forfeit-count').textContent = '0 gage(s) ajouté(s)';
+  document.getElementById('btn-launch-comp').disabled = true;
+  document.querySelectorAll('.suggestion-tag').forEach(btn => {
+    btn.classList.remove('used');
+    btn.disabled = false;
+  });
   goTo('comp');
   renderCompStep();
 }
@@ -2268,10 +2319,13 @@ function drawWheel(canvas, forfeits, angle) {
     ctx.fillText(label, r - 10, 4);
     ctx.restore();
   }
-  // Cercle central
+  // Hub central — gradient radial sombre avec anneau violet
   ctx.beginPath(); ctx.arc(cx, cy, 14, 0, Math.PI * 2);
-  ctx.fillStyle = '#0a0514'; ctx.fill();
-  ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 1.5; ctx.stroke();
+  const hubGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 14);
+  hubGrad.addColorStop(0, '#1c1c2e');
+  hubGrad.addColorStop(1, '#0c0c14');
+  ctx.fillStyle = hubGrad; ctx.fill();
+  ctx.strokeStyle = 'rgba(168,85,247,0.4)'; ctx.lineWidth = 2; ctx.stroke();
 }
 
 function skipCard() {
