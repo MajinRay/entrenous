@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EntreNous — De vraies questions pour de vraies conversations</title>
+<meta property="og:title" content="EntreNous — De vraies questions pour de vraies conversations">
+<meta property="og:description" content="Un jeu de cartes pour apprendre à connaître les gens qui t'entourent. Vraiment.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://entrenousgame.netlify.app/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EntreNous — De vraies questions pour de vraies conversations">
+<meta name="twitter:description" content="Un jeu de cartes pour apprendre à connaître les gens qui t'entourent. Vraiment.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -511,6 +518,240 @@ body {
   .modes-grid { grid-template-columns: 1fr; }
   .categories-strip { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ── HARD MODE ────────────────────────────────── */
+.mode-option[data-mode="hard"] { border-color: rgba(239,68,68,0.2); }
+.mode-option[data-mode="hard"]:hover { border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.05); }
+.mode-option[data-mode="hard"].selected { border-color: #EF4444; background: rgba(239,68,68,0.08); }
+.mode-option[data-mode="hard"].selected .mode-option-check { background: #EF4444; border-color: #EF4444; color: #fff; }
+
+/* ── SWIPE HINTS BAR ──────────────────────────── */
+.swipe-hints {
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  padding: 10px 0 2px; opacity: 0; pointer-events: none;
+  transition: opacity 0.5s;
+}
+.swipe-hints.visible { opacity: 0.75; pointer-events: auto; }
+.swipe-arrow {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  color: var(--text); font-size: 18px; width: 40px; height: 40px;
+  border-radius: 50%; cursor: pointer; pointer-events: auto;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s; font-family: 'Inter', sans-serif;
+}
+.swipe-arrow:hover { background: rgba(255,255,255,0.18); }
+.swipe-label { font-size: 11px; color: var(--text-muted); font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; }
+@keyframes nudgeL {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-7px); }
+}
+@keyframes nudgeR {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(7px); }
+}
+.swipe-hints.visible .swipe-arrow:first-child { animation: nudgeL 1.2s ease-in-out 2; }
+.swipe-hints.visible .swipe-arrow:last-child  { animation: nudgeR 1.2s ease-in-out 2; }
+
+/* ── MODAL INTRO ──────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(10,5,30,0.88);
+  backdrop-filter: blur(14px); display: none; align-items: center;
+  justify-content: center; z-index: 1000; padding: 20px;
+}
+.modal-overlay.active { display: flex; }
+.modal-card {
+  background: var(--bg2); border: 1px solid var(--border-hover);
+  border-radius: 20px; padding: 32px 28px; max-width: 460px; width: 100%;
+  max-height: 88vh; overflow-y: auto;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+}
+.modal-emoji { font-size: 34px; margin-bottom: 10px; }
+.modal-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; margin-bottom: 10px; line-height: 1.3; }
+.modal-intro-text { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 24px; }
+.modal-section { margin-bottom: 20px; }
+.modal-section-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.modal-section-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+.modal-nav { background: var(--bg3); border-radius: var(--radius-sm); padding: 14px 18px; margin-bottom: 24px; }
+.modal-nav-item { display: flex; align-items: baseline; gap: 10px; font-size: 13px; color: var(--text-muted); margin-bottom: 7px; line-height: 1.5; }
+.modal-nav-item:last-child { margin-bottom: 0; }
+.modal-nav-item strong { color: var(--text); font-weight: 600; min-width: 22px; }
+.btn-modal-start {
+  width: 100%; background: linear-gradient(135deg, #8B3FD4, #C4345A); color: #fff;
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
+  padding: 16px; border-radius: 100px; border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 6px 24px rgba(139,63,212,0.3);
+}
+.btn-modal-start:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(139,63,212,0.45); }
+.btn-rules-link {
+  background: none; border: none; color: var(--text-muted); font-size: 12px;
+  cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+  font-family: 'Inter', sans-serif; padding: 0; transition: color 0.2s;
+  display: block; text-align: center; width: 100%; margin-top: 6px;
+}
+.btn-rules-link:hover { color: var(--text); }
+
+/* ── HARD MODE CARD (landing) ─────────────────── */
+.mode-card-hard {
+  border-color: rgba(239,68,68,0.25);
+  background: linear-gradient(145deg, rgba(59,0,0,0.6), rgba(13,0,0,0.4));
+}
+.mode-card-hard:hover { border-color: rgba(239,68,68,0.5); background: linear-gradient(145deg, rgba(59,0,0,0.8), rgba(13,0,0,0.6)); }
+.mode-card-hard .mode-name { color: #EF4444; }
+
+/* ── PLAY MODE SCREEN ─────────────────────────── */
+.play-mode-container {
+  width: 100%; max-width: 480px; padding: 40px 20px 80px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.play-mode-title {
+  font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600;
+  text-align: center; margin: 32px 0 28px; line-height: 1.3;
+}
+.play-mode-grid {
+  display: flex; flex-direction: column; gap: 16px; width: 100%;
+}
+.play-mode-card {
+  background: var(--bg2); border: 1.5px solid var(--border);
+  border-radius: 20px; padding: 28px 24px; cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  text-align: left;
+}
+.play-mode-card:hover { border-color: var(--border-hover); background: var(--bg3); transform: translateY(-2px); }
+.play-mode-icon { font-size: 36px; margin-bottom: 12px; }
+.play-mode-name { font-weight: 700; font-size: 18px; margin-bottom: 8px; }
+.play-mode-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; font-weight: 300; }
+
+/* ── COMPETITION SCREEN ───────────────────────── */
+#screen-comp { padding: 0 20px; background: var(--bg); }
+.comp-container {
+  width: 100%; max-width: 480px; padding: 40px 0 80px;
+  display: flex; flex-direction: column;
+}
+.comp-progress {
+  display: flex; justify-content: center; gap: 10px; margin: 20px 0 32px;
+}
+.comp-step-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--border-hover); opacity: 0.35;
+  transition: opacity 0.3s, background 0.3s;
+}
+.comp-step-dot.active { background: #8B3FD4; opacity: 1; }
+.comp-step h2 {
+  font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; margin-bottom: 8px;
+}
+.comp-subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.5; }
+.player-input-row, .forfeit-input-row {
+  display: flex; gap: 10px; margin-bottom: 16px;
+}
+.player-input-row input, .forfeit-input-row input {
+  flex: 1; background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 16px; color: var(--text);
+  font-family: 'Inter', sans-serif; font-size: 14px; outline: none;
+  transition: border-color 0.2s;
+}
+.player-input-row input:focus, .forfeit-input-row input:focus { border-color: var(--border-hover); }
+.player-input-row input::placeholder, .forfeit-input-row input::placeholder { color: var(--text-dim); }
+.player-input-row button, .forfeit-input-row button {
+  padding: 12px 18px; background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text); font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: background 0.2s, border-color 0.2s; white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+}
+.player-input-row button:hover, .forfeit-input-row button:hover { background: var(--bg2); border-color: var(--border-hover); }
+.comp-players-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; min-height: 20px; }
+.comp-player-tag {
+  display: flex; align-items: center; gap: 8px; background: var(--bg3);
+  border: 1px solid var(--border); border-radius: 100px; padding: 6px 14px; font-size: 13px;
+}
+.comp-player-tag button {
+  background: none; border: none; color: var(--text-muted); cursor: pointer;
+  font-size: 16px; padding: 0; line-height: 1; transition: color 0.2s;
+}
+.comp-player-tag button:hover { color: #C4345A; }
+.btn-comp-next {
+  width: 100%; background: linear-gradient(135deg, #8B3FD4, #C4345A); color: #fff;
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
+  padding: 16px; border-radius: 100px; border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  box-shadow: 0 6px 24px rgba(139,63,212,0.3); margin-top: 20px;
+}
+.btn-comp-next:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(139,63,212,0.45); }
+.btn-comp-next:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+.comp-modes-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+.forfeit-suggestions {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
+}
+.suggestion-tag {
+  background: var(--bg3); border: 1px solid var(--border); border-radius: 100px;
+  padding: 6px 14px; font-size: 12px; color: var(--text-muted); cursor: pointer;
+  font-family: 'Inter', sans-serif; transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.suggestion-tag:hover { border-color: #8B3FD4; color: var(--text); background: rgba(139,63,212,0.08); }
+.suggestion-tag.used { opacity: 0.4; cursor: default; }
+#wheel-preview { display: block; margin: 16px auto; border-radius: 50%; }
+.forfeit-count { text-align: center; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+
+/* ── WHEEL OVERLAY ────────────────────────────── */
+.wheel-overlay {
+  position: fixed; inset: 0; background: rgba(10,5,30,0.92);
+  backdrop-filter: blur(10px); display: none; align-items: center;
+  justify-content: center; z-index: 500; padding: 20px;
+}
+.wheel-overlay.active { display: flex; }
+.wheel-overlay-card {
+  background: var(--bg2); border: 1px solid var(--border-hover);
+  border-radius: 24px; padding: 32px 24px; max-width: 380px; width: 100%;
+  text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+  position: relative;
+}
+.wheel-overlay-title {
+  font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600;
+  margin-bottom: 20px;
+}
+.wheel-pointer {
+  font-size: 24px; color: #A855F7; line-height: 1;
+  margin-bottom: -8px; display: block;
+}
+#wheel-canvas { border-radius: 50%; display: block; margin: 0 auto 8px; }
+.wheel-result { padding-top: 20px; animation: fadeInUp 0.4s ease; }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.wheel-result-player { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+.wheel-result-forfeit {
+  font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600;
+  line-height: 1.4; margin-bottom: 24px; color: var(--text);
+}
+
+/* ── COMPETITION GAME ACTIONS ─────────────────── */
+.player-banner {
+  width: 100%; max-width: 480px; text-align: center;
+  padding: 10px 20px; font-size: 14px; font-weight: 600;
+  color: rgba(255,255,255,0.9); background: rgba(139,63,212,0.2);
+  border-bottom: 1px solid rgba(139,63,212,0.25);
+  letter-spacing: 0.02em;
+}
+.comp-game-actions {
+  display: flex; gap: 14px; padding: 16px 20px; width: 100%; max-width: 480px;
+}
+.btn-answered {
+  flex: 1; background: linear-gradient(135deg, #16a34a, #15803d); color: #fff;
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
+  padding: 16px; border-radius: 100px; border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(22,163,74,0.3);
+}
+.btn-answered:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(22,163,74,0.45); }
+.btn-skip {
+  flex: 1; background: linear-gradient(135deg, #dc2626, #991b1b); color: #fff;
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
+  padding: 16px; border-radius: 100px; border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(220,38,38,0.3);
+}
+.btn-skip:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(220,38,38,0.45); }
 </style>
 </head>
 <body>
@@ -539,7 +780,7 @@ body {
     </div>
     <div class="logo">EntreNous</div>
     <div class="tagline">De vraies questions pour de vraies conversations</div>
-    <button class="btn-primary" onclick="goTo('config')">Lancer le jeu <span>→</span></button>
+    <button class="btn-primary" onclick="handleLaunch()">Lancer le jeu <span>→</span></button>
   </div>
 
   <div class="cards-preview">
@@ -569,6 +810,7 @@ body {
       <div class="mode-card"><div class="mode-icon">🤝</div><div class="mode-name">Découverte</div><div class="mode-desc">Apprendre à se connaître au-delà du superficiel.</div></div>
       <div class="mode-card"><div class="mode-icon">✨</div><div class="mode-name">Normal</div><div class="mode-desc">Toutes les catégories, équilibré, pour n'importe quelle soirée.</div></div>
       <div class="mode-card"><div class="mode-icon">🌱</div><div class="mode-name">-18</div><div class="mode-desc">Questions pour les jeunes. Profond et accessible.</div></div>
+      <div class="mode-card mode-card-hard"><div class="mode-icon">💣</div><div class="mode-name">Hard — Sans filtre</div><div class="mode-desc">Pour les vrais. Questions qui créent des frictions ou renforcent les liens.</div></div>
     </div>
     <div class="divider"></div>
     <div class="section-title">8 catégories</div>
@@ -585,11 +827,85 @@ body {
   </div>
 </div>
 
+<!-- ══ PLAY MODE ════════════════════════════════════════ -->
+<div id="screen-play-mode" class="screen">
+  <div class="play-mode-container">
+    <button class="btn-back" onclick="goTo('landing')" style="align-self:flex-start">←</button>
+    <div class="play-mode-title">Comment voulez-vous jouer ?</div>
+    <div class="play-mode-grid">
+      <div class="play-mode-card" onclick="chooseFreeMode()">
+        <div class="play-mode-icon">💬</div>
+        <div class="play-mode-name">Discussion libre</div>
+        <div class="play-mode-desc">Pas besoin d'ajouter des joueurs. Tout le monde répond à chaque question. Idéal pour des conversations ouvertes.</div>
+      </div>
+      <div class="play-mode-card" onclick="chooseCompMode()">
+        <div class="play-mode-icon">🏆</div>
+        <div class="play-mode-name">Compétition</div>
+        <div class="play-mode-desc">Ajoutez les joueurs, choisissez vos gages. Chaque carte est attribuée à un joueur — skip une question et tu tournes la roue.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ COMPETITION SETUP ════════════════════════════════ -->
+<div id="screen-comp" class="screen">
+  <div class="comp-container">
+    <button class="btn-back" onclick="compBack()">←</button>
+    <div class="comp-progress">
+      <div class="comp-step-dot active" id="dot-1"></div>
+      <div class="comp-step-dot" id="dot-2"></div>
+      <div class="comp-step-dot" id="dot-3"></div>
+    </div>
+
+    <!-- Étape 1 : Joueurs -->
+    <div class="comp-step" id="comp-step-1">
+      <h2>Ajoutez les joueurs</h2>
+      <p class="comp-subtitle">Minimum 2 joueurs pour lancer la partie.</p>
+      <div class="player-input-row">
+        <input type="text" id="comp-player-input" placeholder="Prénom du joueur..." maxlength="20">
+        <button onclick="addCompPlayer()">Ajouter</button>
+      </div>
+      <div id="comp-players-list" class="comp-players-tags"></div>
+      <button class="btn-comp-next" id="btn-comp-next-1" disabled onclick="compNextStep()">Étape suivante →</button>
+    </div>
+
+    <!-- Étape 2 : Mode de jeu -->
+    <div class="comp-step" id="comp-step-2" style="display:none">
+      <h2>Choisissez un mode</h2>
+      <p class="comp-subtitle">Sélectionnez les questions qui correspondront à votre groupe.</p>
+      <div id="comp-modes-grid" class="comp-modes-grid"></div>
+      <button class="btn-comp-next" id="btn-comp-next-2" disabled onclick="compNextStep()">Étape suivante →</button>
+    </div>
+
+    <!-- Étape 3 : Roue des gages -->
+    <div class="comp-step" id="comp-step-3" style="display:none">
+      <h2>La roue des gages</h2>
+      <p class="comp-subtitle">Ajoutez au moins 4 gages. Chaque joueur skippé devra en accomplir un.</p>
+      <div class="forfeit-input-row">
+        <input type="text" id="forfeit-input" placeholder="Écrire un gage..." maxlength="60">
+        <button onclick="addForfeit()">Ajouter</button>
+      </div>
+      <div class="forfeit-suggestions" id="forfeit-suggestions">
+        <button class="suggestion-tag" onclick="useSuggestion(this)">Imiter quelqu'un du groupe</button>
+        <button class="suggestion-tag" onclick="useSuggestion(this)">Boire cul sec</button>
+        <button class="suggestion-tag" onclick="useSuggestion(this)">Faire 10 pompes</button>
+        <button class="suggestion-tag" onclick="useSuggestion(this)">Raconter son pire souvenir</button>
+        <button class="suggestion-tag" onclick="useSuggestion(this)">Poster une story embarrassante</button>
+        <button class="suggestion-tag" onclick="useSuggestion(this)">Appeler quelqu'un au hasard</button>
+      </div>
+      <span class="wheel-pointer" style="display:block;text-align:center;font-size:20px;color:#A855F7;margin-bottom:-4px">▼</span>
+      <canvas id="wheel-preview" width="260" height="260"></canvas>
+      <div id="forfeit-count" class="forfeit-count">0 gage(s) ajouté(s)</div>
+      <button class="btn-comp-next" id="btn-launch-comp" disabled onclick="launchCompGame()">Lancer le jeu 🎮</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ CONFIG ════════════════════════════════════════════ -->
 <div id="screen-config" class="screen">
   <div class="config-inner">
     <div class="config-header">
-      <button class="btn-back" onclick="goTo('landing')">←</button>
+      <button class="btn-back" onclick="goTo('play-mode')">←</button>
       <div class="config-title">Configurer la partie</div>
     </div>
 
@@ -628,6 +944,11 @@ body {
         <div class="mode-option" onclick="selectMode('moins18')" data-mode="moins18">
           <div class="mode-option-icon">🌱</div>
           <div class="mode-option-info"><div class="mode-option-name">-18</div><div class="mode-option-desc">Questions pour les jeunes — profond et accessible</div></div>
+          <div class="mode-option-check"></div>
+        </div>
+        <div class="mode-option" onclick="selectMode('hard')" data-mode="hard">
+          <div class="mode-option-icon">💣</div>
+          <div class="mode-option-info"><div class="mode-option-name">Hard — Sans filtre</div><div class="mode-option-desc">Pour les vrais. Questions qui créent des frictions ou renforcent les liens.</div></div>
           <div class="mode-option-check"></div>
         </div>
       </div>
@@ -696,13 +1017,43 @@ body {
     </div>
   </div>
 
+  <div class="swipe-hints" id="swipe-hints">
+    <button class="swipe-arrow" onclick="prevCard()">←</button>
+    <span class="swipe-label">Swipe</span>
+    <button class="swipe-arrow" onclick="nextCard()">→</button>
+  </div>
+
+  <!-- Bannière joueur actif (mode compétition) -->
+  <div class="player-banner" id="player-banner" style="display:none"></div>
+
+  <!-- Actions compétition (mode compétition uniquement) -->
+  <div class="comp-game-actions" id="comp-game-actions" style="display:none">
+    <button class="btn-answered" onclick="nextCard()">✅ Répondu</button>
+    <button class="btn-skip" onclick="skipCard()">⏭ Skip</button>
+  </div>
+
   <div class="game-footer">
     <div class="game-counter" id="game-counter">1 / 0</div>
-    <div class="game-nav-row">
+    <div class="game-nav-row" id="game-nav-row">
       <button class="btn-prev" id="btn-prev" onclick="prevCard()" title="Carte précédente" disabled>←</button>
       <button class="btn-next" style="flex:1" onclick="nextCard()">Piocher une carte →</button>
     </div>
     <button class="btn-fav-go" onclick="goTo('favorites')">Voir mes coups de cœur</button>
+    <button class="btn-rules-link" onclick="showIntro()">Revoir les règles</button>
+  </div>
+
+  <!-- Overlay roue des gages (mode compétition, skip) -->
+  <div class="wheel-overlay" id="wheel-overlay">
+    <div class="wheel-overlay-card">
+      <div class="wheel-overlay-title" id="wheel-overlay-title">La roue tourne... 🎡</div>
+      <span class="wheel-pointer">▼</span>
+      <canvas id="wheel-canvas" width="280" height="280"></canvas>
+      <div class="wheel-result" id="wheel-result" style="display:none">
+        <div class="wheel-result-player" id="wheel-result-player"></div>
+        <div class="wheel-result-forfeit" id="wheel-result-forfeit"></div>
+        <button class="btn-primary" onclick="closeForfeitOverlay()">✅ Gage fait !</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -727,6 +1078,40 @@ body {
 <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Changer le thème">
   <span id="theme-icon">🌙</span>
 </button>
+
+<!-- ══ MODAL INTRO ══════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-intro">
+  <div class="modal-card">
+    <div class="modal-emoji">🃏</div>
+    <div class="modal-title">Bienvenue sur EntreNous</div>
+    <div class="modal-intro-text">
+      Un jeu avec de vraies questions pour de vraies conversations.<br>
+      Le but : apprendre à connaître les gens qui t'entourent. Vraiment.
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title"><span>👥</span> Mode groupe — tour par tour</div>
+      <div class="modal-section-body">
+        Ajoutez les prénoms des joueurs. Piochez une carte — la personne dont c'est le tour doit répondre honnêtement. Les autres peuvent réagir, creuser, rebondir.
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title"><span>💬</span> Mode discussion libre</div>
+      <div class="modal-section-body">
+        Piochez des cartes et tout le monde répond. Moins de pression, plus de débats et de vraies discussions. Parfait pour démarrer une soirée.
+      </div>
+    </div>
+
+    <div class="modal-nav">
+      <div class="modal-nav-item"><strong>←</strong> Swipe à gauche (ou bouton ←) pour revenir à la carte précédente</div>
+      <div class="modal-nav-item"><strong>→</strong> Swipe à droite (ou "Piocher") pour passer à la suivante</div>
+      <div class="modal-nav-item"><strong>♡</strong> Sauvegarde une carte dans tes coups de cœur</div>
+    </div>
+
+    <button class="btn-modal-start" onclick="closeIntro()">Commencer →</button>
+  </div>
+</div>
 
 <script>
 /* ── DATA ─────────────────────────────────────────────── */
@@ -755,6 +1140,23 @@ const CATEGORIES = {
   societe:   { name: 'Société', emoji: '🌍', color: '#64748B',
                bg: 'linear-gradient(145deg, #1E293B 0%, #0F172A 40%, #060C16 100%)',
                accent: 'rgba(100,116,139,0.3)' },
+  hard:      { name: 'Hard', emoji: '💣', color: '#EF4444',
+               bg: 'linear-gradient(145deg, #3B0000 0%, #1A0000 40%, #0D0000 100%)',
+               accent: 'rgba(239,68,68,0.4)' },
+};
+
+const STD_CATS = ['philo','amour','drole','passe','futur','intime','entrenous','societe'];
+
+const GRADIENT_STOPS = {
+  philo:     ['#2D1B69','#0D0520'],
+  amour:     ['#6B1020','#1A0408'],
+  drole:     ['#7C2D12','#1C0A00'],
+  passe:     ['#4A2C0A','#130A00'],
+  futur:     ['#0C1A4A','#020610'],
+  intime:    ['#5B0C2A','#160408'],
+  entrenous: ['#0A3B28','#020E09'],
+  societe:   ['#1E293B','#060C16'],
+  hard:      ['#3B0000','#0D0000'],
 };
 
 const QUESTIONS = [
@@ -1003,14 +1405,251 @@ const QUESTIONS = [
   {id:427,cat:'societe', jeune:true, text:"Si tu pouvais changer une règle à l'école ou à la maison, ce serait laquelle ?"},
   {id:428,cat:'drole',   jeune:true, text:"C'est quoi le défi ou le pari le plus idiot que tu aies accepté ?"},
   {id:429,cat:'futur',   jeune:true, text:"C'est quoi quelque chose que tu veux accomplir que personne dans ta famille n'a fait avant toi ?"},
+  // ── Hard — Sans filtre ─────────────────────────────
+  {id:500,cat:'hard', text:"C'est quoi la chose la plus inavouable que tu aies faite à quelqu'un que tu aimais ?"},
+  {id:501,cat:'hard', text:"Y a-t-il quelqu'un dans ce groupe à qui tu n'as jamais vraiment pardonné ?"},
+  {id:502,cat:'hard', text:"T'es-tu déjà comporté·e d'une façon dont tu aurais honte si les autres le savaient ?"},
+  {id:503,cat:'hard', text:"As-tu déjà menti sur quelque chose d'important à quelqu'un dans cette pièce ?"},
+  {id:504,cat:'hard', text:"Quelle vérité est-ce que tu évites de te dire sur toi-même ?"},
+  {id:505,cat:'hard', text:"Si tu devais révéler ton pire défaut à tout le monde ici, ce serait quoi ?"},
+  {id:506,cat:'hard', text:"Y a-t-il quelqu'un ici dont tu as mal parlé dans son dos ?"},
+  {id:507,cat:'hard', text:"Quelle est la limite que tu as franchie et que tu n'aurais pas dû ?"},
+  {id:508,cat:'hard', text:"Qu'est-ce que tu fais semblant de ne pas savoir pour garder la paix ?"},
+  {id:509,cat:'hard', text:"T'es-tu déjà senti·e soulagé·e d'une rupture ou d'une mort qui aurait dû t'affecter ?"},
+  {id:510,cat:'hard', text:"Qu'est-ce que tu n'as jamais osé dire à quelqu'un ici en face ?"},
+  {id:511,cat:'hard', text:"Si tout le monde ici savait la vraie raison de ta dernière grosse dispute, est-ce qu'ils te jugeraient ?"},
+  {id:512,cat:'hard', text:"Y a-t-il quelque chose que tu as fait par jalousie et dont tu n'as jamais parlé ?"},
+  {id:513,cat:'hard', text:"Quelle décision de ta vie tu as prise uniquement pour les autres et que tu regrettes ?"},
+  {id:514,cat:'hard', text:"Qu'est-ce qui te ferait vraiment honte si tes proches le découvraient un jour ?"},
+
+  // ── Nouvelles questions Philo (IDs 1000-1019) ──────
+  {id:1000,cat:'philo',text:"Qu'est-ce que tu n'as jamais osé dire à quelqu'un que tu aimes ?"},
+  {id:1001,cat:'philo',text:"Quelle peur tu n'as jamais avouée à personne ?"},
+  {id:1002,cat:'philo',text:"Si tu devais décrire ta vie avec une météo, ce serait quoi en ce moment ?"},
+  {id:1003,cat:'philo',text:"Qu'est-ce que tu sacrifierais pour être vraiment heureux·se ?"},
+  {id:1004,cat:'philo',text:"Est-ce que tu penses que les gens autour de toi te connaissent vraiment ?"},
+  {id:1005,cat:'philo',text:"Y a-t-il une conviction que tu as abandonnée en grandissant et que tu regrettes ?"},
+  {id:1006,cat:'philo',text:"Qu'est-ce que tu ferais différemment si tu savais que personne ne te juge ?"},
+  {id:1007,cat:'philo',text:"Quel est le plus grand paradoxe de ta personnalité ?"},
+  {id:1008,cat:'philo',text:"Si tu pouvais transmettre une seule leçon de vie, laquelle serait-ce ?"},
+  {id:1009,cat:'philo',text:"À quel moment de ta vie tu t'es senti·e le plus libre ?"},
+  {id:1010,cat:'philo',text:"Crois-tu qu'on peut vraiment changer qui on est fondamentalement ?"},
+  {id:1011,cat:'philo',text:"Qu'est-ce que le bonheur représente concrètement pour toi aujourd'hui ?"},
+  {id:1012,cat:'philo',text:"Qu'est-ce que tu aimerais comprendre sur toi-même mais qui t'échappe encore ?"},
+  {id:1013,cat:'philo',text:"Quel est le moment où tu t'es senti·e le plus seul·e, même entouré·e ?"},
+  {id:1014,cat:'philo',text:"Qu'est-ce que tu fais semblant d'avoir accepté alors que ce n'est pas vraiment le cas ?"},
+  {id:1015,cat:'philo',text:"Si tu avais une seconde chance sur une seule décision de ta vie, laquelle choisirais-tu ?"},
+  {id:1016,cat:'philo',text:"Quelle est la chose dont tu es le plus fier·e et dont tu ne parles jamais ?"},
+  {id:1017,cat:'philo',text:"Y a-t-il un moment où tu aurais dû demander de l'aide et tu ne l'as pas fait ?"},
+  {id:1018,cat:'philo',text:"À quoi crois-tu sincèrement qui est difficile à expliquer aux autres ?"},
+  {id:1019,cat:'philo',text:"Qu'est-ce qui donne vraiment du sens à ta vie en ce moment ?"},
+
+  // ── Nouvelles questions Amour (IDs 1020-1039) ──────
+  {id:1020,cat:'amour',text:"Quelle est la chose que tu n'as jamais osé proposer à ton/ta partenaire ?"},
+  {id:1021,cat:'amour',text:"T'es-tu déjà retenu·e de dire 'je t'aime' alors que tu le pensais vraiment ?"},
+  {id:1022,cat:'amour',text:"Quel est pour toi l'acte romantique qui compte vraiment, pas le plus grand ?"},
+  {id:1023,cat:'amour',text:"Est-ce qu'il t'arrive de comparer ton/ta partenaire à quelqu'un d'autre ?"},
+  {id:1024,cat:'amour',text:"Quelle est la chose que tu voudrais changer dans ta façon d'aimer ?"},
+  {id:1025,cat:'amour',text:"Quelle est la limite que quelqu'un a franchie sans savoir que ça te blessait ?"},
+  {id:1026,cat:'amour',text:"As-tu déjà joué un rôle dans une relation pour plaire à l'autre, sans le montrer ?"},
+  {id:1027,cat:'amour',text:"As-tu déjà été attiré·e par quelqu'un que tu n'aurais pas dû ?"},
+  {id:1028,cat:'amour',text:"Quel est le compliment le plus sincère que tu pourrais faire à quelqu'un ici ?"},
+  {id:1029,cat:'amour',text:"C'est quoi pour toi la différence entre aimer quelqu'un et l'aimer vraiment ?"},
+  {id:1030,cat:'amour',text:"As-tu déjà continué une relation par peur de la solitude plutôt que par amour ?"},
+  {id:1031,cat:'amour',text:"Qu'est-ce que tu ne ferais plus jamais dans une relation après ce que tu as vécu ?"},
+  {id:1032,cat:'amour',text:"Quelle est la chose que tu as apprise sur toi-même grâce à une rupture ?"},
+  {id:1033,cat:'amour',text:"As-tu déjà dit 'ça va' alors que ça n'allait vraiment pas dans une relation ?"},
+  {id:1034,cat:'amour',text:"Quelle est la chose que tu gardes secrète à ton/ta partenaire ou à ta famille ?"},
+  {id:1035,cat:'amour',text:"Est-ce que tu penses mériter l'amour que tu reçois ? Pourquoi ?"},
+  {id:1036,cat:'amour',text:"As-tu déjà été jaloux·se d'une façon qui t'a étonné·e toi-même ?"},
+  {id:1037,cat:'amour',text:"Quelle est la qualité que tu cherches chez l'autre et que tu n'as pas toi-même ?"},
+  {id:1038,cat:'amour',text:"Si tu pouvais effacer un souvenir lié à une relation, lequel choisirais-tu ?"},
+  {id:1039,cat:'amour',text:"C'est quoi pour toi le signe que tu peux vraiment faire confiance à quelqu'un ?"},
+
+  // ── Nouvelles questions Drôle (IDs 1040-1059) ──────
+  {id:1040,cat:'drole',text:"Quelle est l'excuse la plus absurde que tu as inventée pour éviter quelque chose ?"},
+  {id:1041,cat:'drole',text:"Quel est le truc le plus gênant que tu aies fait en croyant que personne ne regardait ?"},
+  {id:1042,cat:'drole',text:"Si tu devais te déguiser en quelqu'un dans ce groupe, qui ce serait et comment tu l'imiterais ?"},
+  {id:1043,cat:'drole',text:"Quelle est l'habitude bizarre que tu as mais que tu assumes complètement ?"},
+  {id:1044,cat:'drole',text:"Quel est ton talent le plus inutile mais dont tu es quand même fier·e ?"},
+  {id:1045,cat:'drole',text:"Si ta vie était un film, quel genre ce serait et quel acteur jouerait ton rôle ?"},
+  {id:1046,cat:'drole',text:"Quel est le mensonge le plus ridicule que tu as dit pour te sortir d'une situation ?"},
+  {id:1047,cat:'drole',text:"Quelle est la chose la plus embarrassante que tu aies faite par maladresse ?"},
+  {id:1048,cat:'drole',text:"Si tu pouvais avoir un superpouvoir complètement inutile, lequel choisirais-tu ?"},
+  {id:1049,cat:'drole',text:"Quelle est l'application sur ton téléphone que tu utilises en cachette ?"},
+  {id:1050,cat:'drole',text:"Quel est le surnom le plus ridicule qu'on t'ait jamais donné ?"},
+  {id:1051,cat:'drole',text:"Quelle est la chose la plus étrange que tu fasses quand tu es seul·e ?"},
+  {id:1052,cat:'drole',text:"Si tu avais un panneau accroché dans le dos toute la journée, qu'est-ce qu'il dirait ?"},
+  {id:1053,cat:'drole',text:"Quelle est la dernière fois où tu as ri si fort que tu en as eu mal au ventre ?"},
+  {id:1054,cat:'drole',text:"Quelle habitude de quelqu'un d'autre t'agace au-delà du raisonnable ?"},
+  {id:1055,cat:'drole',text:"Si tu devais écrire ta biographie, quel serait le titre le plus honnête ?"},
+  {id:1056,cat:'drole',text:"Quel est le pire cadeau que tu aies reçu et comment tu as fait semblant d'être content·e ?"},
+  {id:1057,cat:'drole',text:"Quelle est la théorie complotiste la plus absurde à laquelle tu as cru au moins deux secondes ?"},
+  {id:1058,cat:'drole',text:"Si tu pouvais envoyer un message anonyme à quelqu'un dans cette pièce, ce serait quoi ?"},
+  {id:1059,cat:'drole',text:"Quelle est la chose la plus stupide que tu aies achetée en ligne à 2h du matin ?"},
+
+  // ── Nouvelles questions Passé (IDs 1060-1079) ──────
+  {id:1060,cat:'passe',text:"Quel est le conseil que tu aurais aimé recevoir plus tôt dans ta vie ?"},
+  {id:1061,cat:'passe',text:"Quelle est l'expérience qui t'a le plus changé·e en tant que personne ?"},
+  {id:1062,cat:'passe',text:"Si tu pouvais envoyer un message à la version de toi d'il y a 5 ans, ce serait quoi ?"},
+  {id:1063,cat:'passe',text:"Quel est le moment de ta vie que tu voudrais revivre exactement comme il était ?"},
+  {id:1064,cat:'passe',text:"Quelle est la décision que tu as prise par peur et dont tu es fier·e maintenant ?"},
+  {id:1065,cat:'passe',text:"Y a-t-il quelque chose que tu n'as jamais pardonné à quelqu'un de proche ?"},
+  {id:1066,cat:'passe',text:"Quelle est la version de toi-même que tu as dû abandonner pour grandir ?"},
+  {id:1067,cat:'passe',text:"Si tu pouvais effacer un souvenir, lequel serait-ce et pourquoi ?"},
+  {id:1068,cat:'passe',text:"Quel est le risque que tu regrettes de ne pas avoir pris ?"},
+  {id:1069,cat:'passe',text:"Quelle est la personne qui t'a le plus influencé·e dans ta vie sans le savoir ?"},
+  {id:1070,cat:'passe',text:"Qu'est-ce que ton enfant intérieur ferait si tu lui laissais les rênes une journée ?"},
+  {id:1071,cat:'passe',text:"Quel est le moment où tu as réalisé que tu avais vraiment grandi ?"},
+  {id:1072,cat:'passe',text:"Quelle est la chose que tu aurais fait différemment dans une amitié passée ?"},
+  {id:1073,cat:'passe',text:"Quel est le souvenir qui te fait sourire même dans les pires journées ?"},
+  {id:1074,cat:'passe',text:"Quelle est la chose que quelqu'un a faite pour toi et que tu n'as jamais vraiment remerciée ?"},
+  {id:1075,cat:'passe',text:"Quel est le moment où tu as le plus douté de toi-même, et qu'est-ce qui t'a sorti·e de là ?"},
+  {id:1076,cat:'passe',text:"Si tu pouvais changer une chose dans ta façon d'avoir été élevé·e, ce serait quoi ?"},
+  {id:1077,cat:'passe',text:"Quel est l'échec qui t'a le plus appris sur toi-même ?"},
+  {id:1078,cat:'passe',text:"Quelle est la période de ta vie que tu décrirais comme ta plus grande aventure ?"},
+  {id:1079,cat:'passe',text:"Y a-t-il quelque chose que tu as dit à quelqu'un et que tu ne peux plus reprendre ?"},
+
+  // ── Nouvelles questions Futur (IDs 1080-1099) ──────
+  {id:1080,cat:'futur',text:"Si tu pouvais maîtriser une compétence instantanément, laquelle choisirais-tu ?"},
+  {id:1081,cat:'futur',text:"Dans quel domaine penses-tu avoir encore le plus à apprendre sur toi-même ?"},
+  {id:1082,cat:'futur',text:"Quelle est la décision que tu sais que tu dois prendre mais que tu repousses ?"},
+  {id:1083,cat:'futur',text:"Dans 10 ans, quelle version de toi-même espères-tu être ?"},
+  {id:1084,cat:'futur',text:"Qu'est-ce que tu veux que les gens retiennent de toi dans 20 ans ?"},
+  {id:1085,cat:'futur',text:"Quelle est la peur qui t'empêche d'avancer vers ce que tu veux vraiment ?"},
+  {id:1086,cat:'futur',text:"Si tu n'avais aucune contrainte financière, qu'est-ce que tu ferais de ta vie ?"},
+  {id:1087,cat:'futur',text:"Qu'est-ce que tu ferais demain si tu savais que tu ne pouvais pas échouer ?"},
+  {id:1088,cat:'futur',text:"Quel rêve tu as mis de côté et qui mérite peut-être d'être ressuscité ?"},
+  {id:1089,cat:'futur',text:"Qu'est-ce que tu veux arrêter de faire dans les 6 prochains mois ?"},
+  {id:1090,cat:'futur',text:"Si tu devais changer de vie complètement dans un an, dans quel domaine irais-tu ?"},
+  {id:1091,cat:'futur',text:"Qu'est-ce qui doit changer dans ta vie pour que tu te sentes vraiment aligné·e ?"},
+  {id:1092,cat:'futur',text:"Quelle habitude tu aimerais transmettre aux gens autour de toi ?"},
+  {id:1093,cat:'futur',text:"C'est quoi pour toi une vie réussie dans 30 ans ?"},
+  {id:1094,cat:'futur',text:"Quel projet tu gardes secret parce que tu as peur du regard des autres ?"},
+  {id:1095,cat:'futur',text:"Si tu pouvais vivre dans n'importe quelle ville du monde, où irais-tu et pourquoi ?"},
+  {id:1096,cat:'futur',text:"Qu'est-ce que tu veux encore faire que tu n'as jamais osé ?"},
+  {id:1097,cat:'futur',text:"Quelle est la croyance sur toi-même que tu dois déconstruire pour avancer ?"},
+  {id:1098,cat:'futur',text:"Si ta vie était un livre, quel chapitre veux-tu écrire ensuite ?"},
+  {id:1099,cat:'futur',text:"Qu'est-ce que tu feras différemment maintenant que tu as vécu ce que tu as vécu ?"},
+
+  // ── Nouvelles questions Intime (IDs 1100-1119) ──────
+  {id:1100,cat:'intime',text:"Quelle est la chose que les gens comprennent souvent de travers chez toi ?"},
+  {id:1101,cat:'intime',text:"Quelle valeur est absolument non négociable pour toi dans une amitié ?"},
+  {id:1102,cat:'intime',text:"Comment sais-tu que tu fais vraiment confiance à quelqu'un ?"},
+  {id:1103,cat:'intime',text:"Qu'est-ce que tu donnes aux autres que tu n'accordes jamais à toi-même ?"},
+  {id:1104,cat:'intime',text:"Quelle est la chose que tu aimerais que les gens sachent sur toi sans avoir à l'expliquer ?"},
+  {id:1105,cat:'intime',text:"Qu'est-ce que tu ressens mais que tu n'arrives jamais à mettre en mots ?"},
+  {id:1106,cat:'intime',text:"Quel est ton mécanisme de défense principal quand tu te sens vulnérable ?"},
+  {id:1107,cat:'intime',text:"Y a-t-il quelque chose que tu t'interdis de ressentir ?"},
+  {id:1108,cat:'intime',text:"Qu'est-ce que tu fais pour prendre soin de toi que personne ne voit ?"},
+  {id:1109,cat:'intime',text:"Quel est le compliment que tu ne sais jamais accepter ?"},
+  {id:1110,cat:'intime',text:"Qu'est-ce qui te touche vraiment, même si tu fais semblant que ça ne te fait rien ?"},
+  {id:1111,cat:'intime',text:"Quelle est la chose que tu te reproches le plus souvent sans raison valable ?"},
+  {id:1112,cat:'intime',text:"Comment tu gères les moments où tu te sens incompris·e ?"},
+  {id:1113,cat:'intime',text:"Qu'est-ce que tu as du mal à demander, même quand tu en as besoin ?"},
+  {id:1114,cat:'intime',text:"Quelle est la chose dont tu es le plus fier·e de toi mais que tu minimises ?"},
+  {id:1115,cat:'intime',text:"C'est quoi pour toi le signe que tu as vraiment une connexion avec quelqu'un ?"},
+  {id:1116,cat:'intime',text:"Qu'est-ce qui te fait te sentir en sécurité quand tout va mal ?"},
+  {id:1117,cat:'intime',text:"Quel est le souvenir qui te définit le plus, selon toi ?"},
+  {id:1118,cat:'intime',text:"Y a-t-il quelque chose sur toi que tu ne montres qu'à très peu de personnes ?"},
+  {id:1119,cat:'intime',text:"Qu'est-ce que tu attends des autres que tu n'arrives pas à te donner toi-même ?"},
+
+  // ── Nouvelles questions EntreNous (IDs 1120-1139) ──
+  {id:1120,cat:'entrenous',text:"Quel est le livre, film ou série qui t'a le plus marqué·e et pourquoi ?"},
+  {id:1121,cat:'entrenous',text:"Quelle est la décision dont tu es le plus fier·e d'avoir prise ?"},
+  {id:1122,cat:'entrenous',text:"Comment tu saurais que tu passes la meilleure journée de ta vie ?"},
+  {id:1123,cat:'entrenous',text:"Qu'est-ce qui te rend immédiatement sympathique aux yeux de quelqu'un ?"},
+  {id:1124,cat:'entrenous',text:"Quel est le truc complètement banal qui te rend heureux·se sans logique ?"},
+  {id:1125,cat:'entrenous',text:"Si tu pouvais dîner avec trois personnes de l'histoire, qui choisirais-tu ?"},
+  {id:1126,cat:'entrenous',text:"Quelle est la chose que tu fais mieux que la plupart des gens sans t'en rendre compte ?"},
+  {id:1127,cat:'entrenous',text:"Qu'est-ce qui te fait vraiment rire à chaque fois, sans exception ?"},
+  {id:1128,cat:'entrenous',text:"Quelle est la question que tu poses pour savoir si tu vas vraiment t'entendre avec quelqu'un ?"},
+  {id:1129,cat:'entrenous',text:"Si tu pouvais appuyer sur pause sur un moment de ta vie, lequel serait-ce ?"},
+  {id:1130,cat:'entrenous',text:"Quelle est la chose que tu ferais si tu savais que tu n'échouerais pas ?"},
+  {id:1131,cat:'entrenous',text:"Qu'est-ce que tu ferais de ta journée si tu n'avais aucune obligation ?"},
+  {id:1132,cat:'entrenous',text:"Quel est le meilleur conseil qu'on t'ait jamais donné et que tu appliques encore ?"},
+  {id:1133,cat:'entrenous',text:"Quelle est la chose que tu n'aurais jamais cru faire et que tu fais maintenant ?"},
+  {id:1134,cat:'entrenous',text:"Si tu pouvais vivre dans n'importe quelle époque, ce serait laquelle et pourquoi ?"},
+  {id:1135,cat:'entrenous',text:"C'est quoi pour toi une soirée parfaite ?"},
+  {id:1136,cat:'entrenous',text:"Quel est ton talent caché que personne ici ne soupçonne ?"},
+  {id:1137,cat:'entrenous',text:"Quelle est la chose que tu veux apprendre avant la fin de l'année ?"},
+  {id:1138,cat:'entrenous',text:"Si tu pouvais changer une règle de la société, laquelle serait-ce ?"},
+  {id:1139,cat:'entrenous',text:"Quelle est la question que tu aimerais qu'on te pose mais que personne ne pose ?"},
+
+  // ── Nouvelles questions Société (IDs 1140-1159) ────
+  {id:1140,cat:'societe',text:"Quelle est la chose que tout le monde fait et que tu trouves absurde ?"},
+  {id:1141,cat:'societe',text:"Si tu pouvais changer une chose dans l'éducation, ce serait quoi ?"},
+  {id:1142,cat:'societe',text:"Quelle est la conviction que tu as qui te rend différent·e de la plupart des gens ?"},
+  {id:1143,cat:'societe',text:"Est-ce que tu penses que les réseaux sociaux ont changé qui tu es ? Comment ?"},
+  {id:1144,cat:'societe',text:"Quelle injustice du quotidien t'énerve le plus et que personne ne remarque ?"},
+  {id:1145,cat:'societe',text:"Si tu avais le pouvoir de changer une loi immédiatement, laquelle serait-ce ?"},
+  {id:1146,cat:'societe',text:"Quelle est la chose que la société t'a apprise que tu as dû désapprendre ?"},
+  {id:1147,cat:'societe',text:"Quel rôle joues-tu en société qui ne te ressemble pas vraiment ?"},
+  {id:1148,cat:'societe',text:"Quelle est la chose que tu tolères socialement mais que tu trouves profondément faux ?"},
+  {id:1149,cat:'societe',text:"Si tu devais vivre sans internet pendant un mois, qu'est-ce qui te manquerait le plus ?"},
+  {id:1150,cat:'societe',text:"Qu'est-ce que tu penses que ta génération fait mieux que les précédentes ?"},
+  {id:1151,cat:'societe',text:"Quelle est la chose que les adultes t'ont dite qui s'est révélée complètement fausse ?"},
+  {id:1152,cat:'societe',text:"Qu'est-ce qui t'a le plus surpris dans le monde du travail par rapport à tes attentes ?"},
+  {id:1153,cat:'societe',text:"Quelle est la valeur que tu défendais à 15 ans et que tu ne défends plus aujourd'hui ?"},
+  {id:1154,cat:'societe',text:"Comment tu réagis face aux gens qui ont des valeurs radicalement différentes des tiennes ?"},
+  {id:1155,cat:'societe',text:"Quelle est la chose que tu ferais différemment si tu dirigeais ce pays ?"},
+  {id:1156,cat:'societe',text:"Est-ce que tu penses que la solidarité est encore possible dans la société actuelle ?"},
+  {id:1157,cat:'societe',text:"Quelle est la norme sociale que tu trouves la plus toxique ?"},
+  {id:1158,cat:'societe',text:"Quel métier ou engagement considères-tu comme le plus précieux pour la société ?"},
+  {id:1159,cat:'societe',text:"Est-ce que tu penses que la réussite individuelle est possible sans écraser les autres ?"},
+
+  // ── Nouvelles questions Hard (IDs 1160-1179) ───────
+  {id:1160,cat:'hard',text:"As-tu déjà laissé quelqu'un prendre le blâme à ta place ?"},
+  {id:1161,cat:'hard',text:"Quelle est la chose que tu voudrais dire à quelqu'un ici mais que tu n'oses pas ?"},
+  {id:1162,cat:'hard',text:"Y a-t-il quelqu'un dans ta vie dont tu t'es servi·e sans lui rendre la pareille ?"},
+  {id:1163,cat:'hard',text:"Quelle croyance sur toi-même sais-tu au fond être fausse ?"},
+  {id:1164,cat:'hard',text:"Si tout le monde ici pouvait lire tes pensées ce soir, quelle serait ta plus grande honte ?"},
+  {id:1165,cat:'hard',text:"As-tu déjà sabordé quelque chose de bien parce que tu ne te sentais pas à la hauteur ?"},
+  {id:1166,cat:'hard',text:"Quelle est la chose que tu fais différemment selon que les gens te regardent ou non ?"},
+  {id:1167,cat:'hard',text:"As-tu déjà manipulé quelqu'un pour obtenir ce que tu voulais ?"},
+  {id:1168,cat:'hard',text:"Y a-t-il quelqu'un ici à qui tu devrais des excuses que tu n'as jamais faites ?"},
+  {id:1169,cat:'hard',text:"Quelle est la chose que tu gardes secrète parce que tu as peur du jugement de tes proches ?"},
+  {id:1170,cat:'hard',text:"As-tu déjà trahi la confiance de quelqu'un pour protéger la tienne ?"},
+  {id:1171,cat:'hard',text:"Quelle est la chose que tu aurais dû refuser mais que tu as acceptée par lâcheté ?"},
+  {id:1172,cat:'hard',text:"Y a-t-il quelque chose que tu as fait et dont tu n'as jamais parlé à personne ?"},
+  {id:1173,cat:'hard',text:"Quelle est la version de toi que tu montres pour que les gens t'aiment, et qui n'est pas vraiment toi ?"},
+  {id:1174,cat:'hard',text:"As-tu déjà blessé quelqu'un intentionnellement en faisant semblant que c'était accidentel ?"},
+  {id:1175,cat:'hard',text:"Qu'est-ce que tu fais pour éviter de regarder en face quelque chose dans ta vie ?"},
+  {id:1176,cat:'hard',text:"Quelle est la chose que tu as accomplie et dont tu n'es pas vraiment fier·e ?"},
+  {id:1177,cat:'hard',text:"As-tu déjà été honnête avec quelqu'un uniquement pour qu'il parte ?"},
+  {id:1178,cat:'hard',text:"Quel est le mensonge que tu te racontes en ce moment sur ta propre vie ?"},
+  {id:1179,cat:'hard',text:"Si tu devais nommer une chose sur toi que tu ne veux pas changer mais que tu sais problématique, ce serait quoi ?"},
+
+  // ── Nouvelles questions -18/Jeune (IDs 1180-1199) ──
+  {id:1180,cat:'philo',   jeune:true, text:"Si tu pouvais changer une règle à l'école, ce serait laquelle ?"},
+  {id:1181,cat:'entrenous',jeune:true, text:"C'est quoi pour toi un vrai·e ami·e ?"},
+  {id:1182,cat:'philo',   jeune:true, text:"Qu'est-ce qui te rend vraiment heureux·se, même si c'est un truc simple ?"},
+  {id:1183,cat:'passe',   jeune:true, text:"As-tu déjà regretté quelque chose que tu n'as pas dit à quelqu'un ?"},
+  {id:1184,cat:'drole',   jeune:true, text:"Quel super-pouvoir tu choisirais et qu'est-ce que tu en ferais vraiment ?"},
+  {id:1185,cat:'societe', jeune:true, text:"Quelle est la chose que tu ne comprends pas chez les adultes ?"},
+  {id:1186,cat:'futur',   jeune:true, text:"Si tu pouvais voyager quelque part demain, où irais-tu et avec qui ?"},
+  {id:1187,cat:'futur',   jeune:true, text:"C'est quoi ton plus grand rêve en ce moment ?"},
+  {id:1188,cat:'philo',   jeune:true, text:"Qu'est-ce que tu veux que les gens pensent de toi ?"},
+  {id:1189,cat:'drole',   jeune:true, text:"Si tu devais décrire ta personnalité avec un animal, ce serait lequel et pourquoi ?"},
+  {id:1190,cat:'entrenous',jeune:true, text:"Quelle est la chose que tu ferais si tu savais que tes parents ne le sauraient jamais ?"},
+  {id:1191,cat:'passe',   jeune:true, text:"Quel est le meilleur souvenir que tu as avec ta famille ou tes amis ?"},
+  {id:1192,cat:'futur',   jeune:true, text:"Dans quel métier tu t'imagines dans 10 ans, et pourquoi ?"},
+  {id:1193,cat:'societe', jeune:true, text:"Est-ce que tu penses que les réseaux sociaux te font du bien ou du mal ?"},
+  {id:1194,cat:'philo',   jeune:true, text:"Quelle est la valeur la plus importante pour toi dans la vie ?"},
+  {id:1195,cat:'entrenous',jeune:true, text:"Si tu pouvais changer une chose dans ton école ou ton quartier, ce serait quoi ?"},
+  {id:1196,cat:'passe',   jeune:true, text:"Quel est le moment où tu t'es senti·e le plus courageux·se ?"},
+  {id:1197,cat:'drole',   jeune:true, text:"Quelle est la chose la plus bête que tu aies faite par défi ?"},
+  {id:1198,cat:'futur',   jeune:true, text:"Si tu pouvais inventer quelque chose pour améliorer le monde, ce serait quoi ?"},
+  {id:1199,cat:'drole',   jeune:true, text:"Quelle est la chanson que tu écoutes en secret parce que tu aurais honte de la montrer ?"},
 ];
 
 const MODE_CATS = {
-  normal:     Object.keys(CATEGORIES),
+  normal:     STD_CATS,
   tardive:    ['philo','futur','intime','passe','societe'],
   spicy:      ['amour','intime','entrenous','drole'],
   decouverte: ['passe','futur','philo','societe','entrenous','drole'],
   moins18:    ['philo','drole','passe','futur','societe'],
+  hard:       ['hard'],
 };
 
 const MODE_META = {
@@ -1019,15 +1658,20 @@ const MODE_META = {
   spicy:      { icon:'🔥', name:'Spicy' },
   decouverte: { icon:'🤝', name:'Découverte' },
   moins18:    { icon:'🌱', name:'-18' },
+  hard:       { icon:'💣', name:'Hard — Sans filtre' },
 };
 
 /* ── STATE ─────────────────────────────────────────────── */
 const state = {
   players: [], mode: null,
-  selectedCats: new Set(Object.keys(CATEGORIES)),
+  selectedCats: new Set(STD_CATS),
   deck: [], index: 0, playerIndex: 0,
   favorites: new Set(JSON.parse(localStorage.getItem('en_favs') || '[]')),
   favMode: false,
+  playMode: 'libre',    // 'libre' ou 'competition'
+  forfeits: [],         // gages pour la roue (mode compétition)
+  compStep: 1,          // étape setup compétition (1, 2, 3)
+  wheelAngle: 0,        // angle courant roue en radians
 };
 
 /* ── THEME ─────────────────────────────────────────────── */
@@ -1065,7 +1709,7 @@ function renderConfig() {
 function renderCategoryToggles() {
   const container = document.getElementById('cat-toggles');
   container.innerHTML = '';
-  Object.entries(CATEGORIES).forEach(([key, cat]) => {
+  STD_CATS.map(key => [key, CATEGORIES[key]]).forEach(([key, cat]) => {
     const isActive = state.selectedCats.has(key);
     const div = document.createElement('div');
     div.className = 'cat-toggle' + (isActive ? ' active' : '');
@@ -1097,7 +1741,7 @@ function selectMode(mode) {
     el.classList.toggle('selected', selected);
     el.querySelector('.mode-option-check').textContent = selected ? '✓' : '';
   });
-  state.selectedCats = new Set(mode === 'normal' ? Object.keys(CATEGORIES) : MODE_CATS[mode]);
+  state.selectedCats = new Set(mode === 'normal' ? STD_CATS : MODE_CATS[mode]);
   renderCategoryToggles();
   updateCatSection();
   updateStartBtn();
@@ -1166,6 +1810,7 @@ function startGame(fromFavs = false) {
 
   goTo('game');
   renderCard(true);
+  if (!localStorage.getItem('en_swiped')) showSwipeHints();
 }
 
 function playFavs() {
@@ -1194,8 +1839,26 @@ function renderCard(animate = false) {
   document.getElementById('card-question').textContent = q.text;
   document.getElementById('game-counter').textContent = `${state.index + 1} / ${state.deck.length}`;
 
+  // Bannière joueur et boutons selon mode de jeu
+  const isComp = state.playMode === 'competition' && state.players.length > 0;
+  const banner = document.getElementById('player-banner');
+  const compActions = document.getElementById('comp-game-actions');
+  const navRow = document.getElementById('game-nav-row');
+
+  if (isComp) {
+    const playerName = state.players[state.playerIndex % state.players.length];
+    banner.textContent = `👤 Tour de ${playerName}`;
+    banner.style.display = 'block';
+    compActions.style.display = 'flex';
+    navRow.style.display = 'none';
+  } else {
+    banner.style.display = 'none';
+    compActions.style.display = 'none';
+    navRow.style.display = 'flex';
+  }
+
   const badge = document.getElementById('card-player-badge');
-  if (state.players.length > 0) {
+  if (state.players.length > 0 && !isComp) {
     const name = state.players[state.playerIndex % state.players.length];
     badge.textContent = name;
     badge.classList.add('visible');
@@ -1213,6 +1876,7 @@ function renderCard(animate = false) {
 }
 
 function nextCard() {
+  hideSwipeHints();
   if (state.index >= state.deck.length - 1) {
     showToast('Toutes les cartes vues ! On mélange...');
     state.deck = shuffle([...state.deck]);
@@ -1225,6 +1889,7 @@ function nextCard() {
 }
 
 function prevCard() {
+  hideSwipeHints();
   if (state.index <= 0) { showToast('C\'est la première carte'); return; }
   state.index--;
   if (state.playerIndex > 0) state.playerIndex--;
@@ -1244,11 +1909,32 @@ function toggleFav() {
   renderCard(false);
 }
 
-function shareCard() {
+async function shareCard() {
   const q = state.deck[state.index];
-  const text = `EntreNous — ${CATEGORIES[q.cat].name}\n\n"${q.text}"\n\nDe vraies questions pour de vraies conversations.`;
-  if (navigator.share) navigator.share({ title: 'EntreNous', text });
-  else navigator.clipboard.writeText(text).then(() => showToast('Copié dans le presse-papiers'));
+  const shareText = `"${q.text}"\n\nentrenousgame.netlify.app`;
+  const btn = document.getElementById('btn-share');
+  btn.textContent = '⏳'; btn.disabled = true;
+  try {
+    const blob = await generateShareImage(q);
+    const file = new File([blob], 'entrenous.png', { type: 'image/png' });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file], title: 'EntreNous', text: shareText });
+    } else if (navigator.share) {
+      await navigator.share({ title: 'EntreNous', text: shareText });
+    } else {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'entrenous-carte.png'; a.click();
+      URL.revokeObjectURL(url);
+      showToast('Image téléchargée !');
+    }
+  } catch(e) {
+    if (e.name !== 'AbortError') {
+      navigator.clipboard.writeText(shareText).then(() => showToast('Lien copié')).catch(() => showToast('Partage non disponible'));
+    }
+  } finally {
+    btn.textContent = '⬆'; btn.disabled = false;
+  }
 }
 
 /* ── SWIPE ─────────────────────────────────────────────── */
@@ -1406,6 +2092,354 @@ function showToast(msg) {
 document.getElementById('player-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') addPlayer();
 });
+document.getElementById('comp-player-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') addCompPlayer();
+});
+document.getElementById('forfeit-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') addForfeit();
+});
+
+/* ── MODAL INTRO ────────────────────────────────────── */
+function handleLaunch() {
+  if (!localStorage.getItem('en_hasSeenIntro')) showIntro();
+  else goTo('play-mode');
+}
+function showIntro() {
+  document.getElementById('modal-intro').classList.add('active');
+}
+function closeIntro() {
+  localStorage.setItem('en_hasSeenIntro', '1');
+  document.getElementById('modal-intro').classList.remove('active');
+  goTo('play-mode');
+}
+
+/* ── PLAY MODE CHOICE ───────────────────────────────── */
+function chooseFreeMode() {
+  state.playMode = 'libre';
+  goTo('config');
+}
+
+function chooseCompMode() {
+  state.playMode = 'competition';
+  state.compStep = 1;
+  state.forfeits = [];
+  state.players = [];
+  state.wheelAngle = 0;
+  goTo('comp');
+  renderCompStep();
+}
+
+/* ── COMPETITION SETUP ──────────────────────────────── */
+function renderCompStep() {
+  [1, 2, 3].forEach(i => {
+    document.getElementById('comp-step-' + i).style.display = (i === state.compStep) ? 'block' : 'none';
+    document.getElementById('dot-' + i).classList.toggle('active', i === state.compStep);
+  });
+  if (state.compStep === 2) renderCompModes();
+  if (state.compStep === 3) redrawWheelPreview();
+}
+
+function compNextStep() {
+  state.compStep++;
+  renderCompStep();
+}
+
+function compBack() {
+  if (state.compStep > 1) {
+    state.compStep--;
+    renderCompStep();
+  } else {
+    goTo('play-mode');
+  }
+}
+
+function addCompPlayer() {
+  const input = document.getElementById('comp-player-input');
+  const name = input.value.trim();
+  if (!name) return;
+  if (state.players.includes(name)) { showToast('Joueur déjà ajouté'); return; }
+  if (state.players.length >= 10) { showToast('Maximum 10 joueurs'); return; }
+  state.players.push(name);
+  input.value = '';
+  renderCompPlayerTags();
+  document.getElementById('btn-comp-next-1').disabled = state.players.length < 2;
+}
+
+function removeCompPlayer(i) {
+  state.players.splice(i, 1);
+  renderCompPlayerTags();
+  document.getElementById('btn-comp-next-1').disabled = state.players.length < 2;
+}
+
+function renderCompPlayerTags() {
+  const list = document.getElementById('comp-players-list');
+  list.innerHTML = state.players.map((p, i) =>
+    `<span class="comp-player-tag">${p}<button onclick="removeCompPlayer(${i})">×</button></span>`
+  ).join('');
+}
+
+function renderCompModes() {
+  const grid = document.getElementById('comp-modes-grid');
+  grid.innerHTML = Object.entries(MODE_META).map(([key, meta]) => `
+    <div class="mode-option ${state.mode === key ? 'selected' : ''}" onclick="selectCompMode('${key}')" data-mode="${key}">
+      <div class="mode-option-icon">${meta.icon}</div>
+      <div class="mode-option-info">
+        <div class="mode-option-name">${meta.name}</div>
+      </div>
+      <div class="mode-option-check">${state.mode === key ? '✓' : ''}</div>
+    </div>`).join('');
+}
+
+function selectCompMode(mode) {
+  state.mode = mode;
+  renderCompModes();
+  document.getElementById('btn-comp-next-2').disabled = false;
+}
+
+function addForfeit() {
+  const input = document.getElementById('forfeit-input');
+  const text = input.value.trim();
+  if (!text) return;
+  if (state.forfeits.includes(text)) { showToast('Gage déjà ajouté'); return; }
+  state.forfeits.push(text);
+  input.value = '';
+  updateForfeitUI();
+}
+
+function useSuggestion(btn) {
+  const text = btn.textContent.trim();
+  if (state.forfeits.includes(text)) { showToast('Déjà dans la roue'); return; }
+  state.forfeits.push(text);
+  btn.classList.add('used');
+  btn.disabled = true;
+  updateForfeitUI();
+}
+
+function updateForfeitUI() {
+  document.getElementById('forfeit-count').textContent = `${state.forfeits.length} gage(s) ajouté(s)`;
+  document.getElementById('btn-launch-comp').disabled = state.forfeits.length < 4;
+  redrawWheelPreview();
+}
+
+function redrawWheelPreview() {
+  const canvas = document.getElementById('wheel-preview');
+  if (!canvas) return;
+  if (state.forfeits.length === 0) {
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, canvas.width/2 - 4, 0, Math.PI*2);
+    ctx.fillStyle = 'var(--bg3)'; ctx.fill();
+    ctx.fillStyle = 'var(--text-dim)'; ctx.font = '13px Inter, sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Ajoutez des gages...', canvas.width/2, canvas.height/2 + 5);
+    return;
+  }
+  drawWheel(canvas, state.forfeits, 0);
+}
+
+function launchCompGame() {
+  if (!state.mode) { selectCompMode('normal'); }
+  state.playerIndex = 0;
+  startGame();
+}
+
+/* ── ROUE DES GAGES ─────────────────────────────────── */
+const WHEEL_COLORS = ['#A855F7','#EC4899','#F97316','#22C55E','#3B82F6','#EAB308','#EF4444','#8B5CF6','#06B6D4','#84CC16'];
+
+function drawWheel(canvas, forfeits, angle) {
+  const ctx = canvas.getContext('2d');
+  const cx = canvas.width / 2, cy = canvas.height / 2, r = cx - 4;
+  const n = forfeits.length;
+  const slice = (Math.PI * 2) / n;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let i = 0; i < n; i++) {
+    const start = angle + i * slice - Math.PI / 2;
+    const end = start + slice;
+    ctx.beginPath(); ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, start, end);
+    ctx.closePath();
+    ctx.fillStyle = WHEEL_COLORS[i % WHEEL_COLORS.length]; ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)'; ctx.lineWidth = 2; ctx.stroke();
+    // Label
+    ctx.save();
+    ctx.translate(cx, cy); ctx.rotate(start + slice / 2);
+    ctx.textAlign = 'right'; ctx.fillStyle = '#fff';
+    ctx.font = `bold ${n > 7 ? 10 : 12}px Inter, sans-serif`;
+    const label = forfeits[i].length > 20 ? forfeits[i].slice(0, 18) + '…' : forfeits[i];
+    ctx.fillText(label, r - 10, 4);
+    ctx.restore();
+  }
+  // Cercle central
+  ctx.beginPath(); ctx.arc(cx, cy, 14, 0, Math.PI * 2);
+  ctx.fillStyle = '#0a0514'; ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 1.5; ctx.stroke();
+}
+
+function skipCard() {
+  const player = state.players[state.playerIndex % state.players.length];
+  const overlay = document.getElementById('wheel-overlay');
+  document.getElementById('wheel-overlay-title').textContent = 'La roue tourne... 🎡';
+  document.getElementById('wheel-result').style.display = 'none';
+  overlay.classList.add('active');
+  const canvas = document.getElementById('wheel-canvas');
+  drawWheel(canvas, state.forfeits, state.wheelAngle);
+
+  const totalAngle = Math.PI * 2 * (5 + Math.random() * 5);
+  const duration = 3000 + Math.random() * 1200;
+  const startTime = performance.now();
+  const startAngle = state.wheelAngle;
+
+  function animate(now) {
+    const elapsed = now - startTime;
+    const t = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+    const angle = startAngle + totalAngle * eased;
+    state.wheelAngle = angle;
+    drawWheel(canvas, state.forfeits, angle);
+    if (t < 1) { requestAnimationFrame(animate); return; }
+
+    // Calcul du segment gagnant : le pointeur est en haut (12h)
+    const n = state.forfeits.length;
+    const norm = ((angle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+    // Segment 0 commence à -π/2, le pointeur est à 0 (top = -π/2 dans repère canvas)
+    const pointed = (Math.PI * 2 - norm) % (Math.PI * 2);
+    const winnerIdx = Math.floor(pointed / ((Math.PI * 2) / n)) % n;
+    const forfeit = state.forfeits[winnerIdx];
+
+    document.getElementById('wheel-overlay-title').textContent = '🎡 Résultat';
+    document.getElementById('wheel-result-player').textContent = `${player} doit →`;
+    document.getElementById('wheel-result-forfeit').textContent = forfeit;
+    document.getElementById('wheel-result').style.display = 'block';
+  }
+  requestAnimationFrame(animate);
+}
+
+function closeForfeitOverlay() {
+  document.getElementById('wheel-overlay').classList.remove('active');
+  nextCard();
+}
+
+/* ── SWIPE HINTS ────────────────────────────────────── */
+let _swipeHintTimer = null;
+function showSwipeHints() {
+  const el = document.getElementById('swipe-hints');
+  el.classList.add('visible');
+  clearTimeout(_swipeHintTimer);
+  _swipeHintTimer = setTimeout(hideSwipeHints, 3200);
+}
+function hideSwipeHints() {
+  const el = document.getElementById('swipe-hints');
+  el.classList.remove('visible');
+  localStorage.setItem('en_swiped', '1');
+  clearTimeout(_swipeHintTimer);
+}
+
+/* ── SHARE IMAGE (Canvas 2D) ─────────────────────────── */
+function drawRoundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+  const words = text.split(' ');
+  let line = '';
+  let lines = [];
+  for (let i = 0; i < words.length; i++) {
+    const test = line + words[i] + ' ';
+    if (ctx.measureText(test).width > maxWidth && i > 0) {
+      lines.push(line.trim());
+      line = words[i] + ' ';
+    } else { line = test; }
+  }
+  lines.push(line.trim());
+  const totalH = lines.length * lineHeight;
+  const startY = y - totalH / 2 + lineHeight / 2;
+  lines.forEach((l, i) => ctx.fillText(l, x, startY + i * lineHeight));
+  return lines.length;
+}
+
+function generateShareImage(q) {
+  return document.fonts.ready.then(() => new Promise(resolve => {
+    const W = 1080, H = 1350;
+    const canvas = document.createElement('canvas');
+    canvas.width = W; canvas.height = H;
+    const ctx = canvas.getContext('2d');
+    const cat = CATEGORIES[q.cat];
+    const stops = GRADIENT_STOPS[q.cat] || ['#1a0a40', '#0d0520'];
+
+    // Background
+    const bg = ctx.createLinearGradient(0, 0, W * 0.7, H);
+    bg.addColorStop(0, stops[0]);
+    bg.addColorStop(1, stops[1]);
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    // Top highlight
+    const hl = ctx.createLinearGradient(0, 0, 0, H * 0.45);
+    hl.addColorStop(0, 'rgba(255,255,255,0.07)');
+    hl.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = hl; ctx.fillRect(0, 0, W, H);
+
+    // Watermark emoji
+    ctx.globalAlpha = 0.055;
+    ctx.font = '480px serif';
+    ctx.fillStyle = '#fff';
+    ctx.textAlign = 'right';
+    ctx.fillText(cat.emoji, W + 20, H * 0.72);
+    ctx.globalAlpha = 1; ctx.textAlign = 'left';
+
+    // Category label
+    ctx.font = '500 34px Inter, sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.55)';
+    ctx.fillText(cat.emoji + '  ' + cat.name.toUpperCase(), 90, 190);
+
+    // Accent line
+    const al = ctx.createLinearGradient(90, 0, 700, 0);
+    al.addColorStop(0, cat.color);
+    al.addColorStop(1, 'rgba(255,255,255,0.08)');
+    ctx.fillStyle = al;
+    ctx.fillRect(90, 218, 560, 3);
+
+    // Question text — centered vertically in middle zone
+    ctx.font = '600 68px "Playfair Display", serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.96)';
+    ctx.textAlign = 'left';
+    wrapText(ctx, q.text, 90, H * 0.5, W - 180, 96);
+
+    // Logo card (bottom left)
+    const cX = 90, cY = H - 240, cW = 88, cH = 118, cR = 12;
+    const cg = ctx.createLinearGradient(cX, cY, cX + cW, cY + cH);
+    cg.addColorStop(0, '#A855F7'); cg.addColorStop(1, '#2D0B6B');
+    ctx.fillStyle = cg;
+    drawRoundRect(ctx, cX, cY, cW, cH, cR);
+    ctx.fill();
+    ctx.font = 'italic 400 44px "Playfair Display", serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.93)';
+    ctx.textAlign = 'center';
+    ctx.fillText('en', cX + cW / 2, cY + cH * 0.67);
+
+    // App name
+    ctx.textAlign = 'left';
+    ctx.font = '600 36px "Playfair Display", serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+    ctx.fillText('EntreNous', 200, H - 190);
+
+    // URL
+    ctx.font = '400 26px Inter, sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.38)';
+    ctx.fillText('entrenousgame.netlify.app', 200, H - 148);
+
+    canvas.toBlob(resolve, 'image/png');
+  }));
+}
 </script>
 </body>
 </html>
