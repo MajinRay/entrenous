@@ -11,13 +11,13 @@ id,cat,text,spicy,jeune
 10,philo,"C'est quoi pour toi la différence entre vivre et exister ?",false,false
 11,philo,"Est-ce que tu crois en quelque chose de plus grand que toi ?",false,false
 12,philo,"Si tu pouvais connaître la date de ta mort, tu voudrais le savoir ?",false,false
-13,philo,"C'est quoi une vérité que tout le monde connaît mais que personne ne dit à voix haute ?",false,false
+13,philo,"Donne une vérité que tout le monde connaît mais que personne ne dit à voix haute ?",false,false
 14,philo,"Le destin existe ou tout est un choix ?",false,false
 15,philo,"C'est quoi l'expérience qui t'a le plus transformé ?",false,false
 16,philo,"Si tu pouvais effacer un souvenir douloureux, est-ce que tu le ferais ?",false,false
 17,philo,"C'est quoi la différence entre être seul et se sentir seul ?",false,false
 18,philo,"Tu penses qu'on peut vraiment changer qui on est au fond ?",false,false
-19,philo,"C'est quoi ta plus grande vérité sur toi-même que tu as du mal à accepter ?",false,false
+19,philo,"Qu'elle est la plus grande vérité sur toi-même que tu as du mal à accepter ?",false,false
 20,philo,"Est-ce que tu penses que les gens naissent avec un caractère ou qu'ils le construisent ?",false,false
 21,philo,"Si tu devais expliquer ce qu'est l'amour à quelqu'un qui ne l'a jamais ressenti, tu dirais quoi ?",false,false
 22,philo,"C'est quoi pour toi la plus belle forme de courage ?",false,false
@@ -28,7 +28,7 @@ id,cat,text,spicy,jeune
 34,amour,"C'est quoi la chose la plus courageuse que tu aies faite par amour ?",false,false
 35,amour,"Comment tu sais que tu es vraiment amoureux ?",false,false
 36,amour,"Tu as déjà eu des sentiments pour deux personnes en même temps ?",false,false
-37,amour,"C'est quoi pour toi un truc absolument rédhibitoire dans une relation ?",false,false
+37,amour,"Qu'est ce qui est pour toi absolument rédhibitoire dans une relation ?",false,false
 38,amour,"Tu as déjà été brisé par quelqu'un ? Comment tu t'en es remis ?",false,false
 39,amour,"C'est quoi la différence entre l'amour et l'attachement ?",false,false
 40,amour,"Est-ce qu'on peut aimer quelqu'un et ne pas lui faire confiance ?",false,false
@@ -57,14 +57,14 @@ id,cat,text,spicy,jeune
 71,drole,"Si tu devais vivre dans une série TV, laquelle tu choisirais ?",false,false
 72,drole,"C'est quoi ton excuse la plus créative pour te défiler de quelque chose ?",false,false
 73,drole,"Tu as déjà menti sur quelque chose de complètement ridicule ?",false,false
-74,drole,"C'est quoi le truc le plus enfantin que tu fasses encore ?",false,false
+74,drole,"C'est quoi le truc le plus enfantin que tu fais encore ?",false,false
 75,drole,"Tu as déjà parlé à toi-même à voix haute en public par accident ?",false,false
 76,drole,"C'est quoi ton habitude la plus bizarre que tu n'avoues généralement pas ?",false,false
 77,drole,"Si tu avais un million d'euros à dépenser en 24h de manière stupide, tu ferais quoi ?",false,false
 78,drole,"C'est quoi la chanson que tu chantes sous la douche en ce moment ?",false,false
 79,drole,"Tu as déjà fait un truc complètement hors de ton personnage ? Raconte.",false,false
 80,drole,"Si tu devais choisir un animal pour te représenter, ce serait lequel et pourquoi ?",false,false
-81,drole,"C'est quoi le truc le plus absurde dont tu t'es déjà énervé ?",false,false
+81,drole,"C'est quoi le truc le plus absurde pour lequel tu t'es déjà énervé ?",false,false
 90,passe,"C'est quoi le souvenir d'enfance qui te fait encore sourire ?",false,false
 91,passe,"Tu as un regret que tu portes encore ?",false,false
 92,passe,"Quelle période de ta vie tu revivrais si tu pouvais ?",false,false
@@ -74,10 +74,10 @@ id,cat,text,spicy,jeune
 96,passe,"Il y a un moment de ta vie que tu aurais aimé vivre autrement ?",false,false
 97,passe,"C'est quoi la chose dont tu es le plus fier dans ton passé ?",false,false
 98,passe,"Tu as déjà fait quelque chose dont tu n'es pas fier mais que tu referais quand même ?",false,false
-99,passe,"C'est quoi le moment où tu as réalisé que tu avais vraiment grandi ?",false,false
+99,passe,"A quel moment tu as réalisé que tu avais vraiment grandi ?",false,false
 100,passe,"Il y a une personne de ton passé que tu aimerais retrouver ?",false,false
 101,passe,"C'est quoi la meilleure décision que tu aies jamais prise ?",false,false
-102,passe,"C'est quoi le moment où tu as compris ce qui comptait vraiment pour toi ?",false,false
+102,passe,"A quel moment tu as compris ce qui comptait vraiment pour toi ?",false,false
 103,passe,"Qu'est-ce que tu dirais à une version plus jeune de toi si tu pouvais ?",false,false
 104,passe,"C'est quoi l'obstacle que tu es le plus fier d'avoir surmonté ?",false,false
 105,passe,"Tu as déjà tout quitté pour quelque chose ou quelqu'un ?",false,false
@@ -114,7 +114,7 @@ id,cat,text,spicy,jeune
 154,intime,"C'est quoi la chose dont tu as le plus honte dans ta vie ?",false,false
 155,intime,"Si les gens pouvaient voir à l'intérieur de toi, qu'est-ce qui les surprendrait le plus ?",false,false
 156,intime,"Tu te parles comment quand tu es seul avec toi-même ?",false,false
-157,intime,"C'est quoi la chose que tu voudrais que les autres comprennent sur toi sans que tu aies à l'expliquer ?",false,false
+157,intime,"Qu'est ce que tu voudrais que les autres comprennent sur toi sans que tu aies à l'expliquer ?",false,false
 158,intime,"Tu as déjà eu envie de tout laisser tomber ? Qu'est-ce qui t'a retenu ?",false,false
 159,intime,"C'est quoi le masque que tu portes le plus souvent ?",false,false
 160,intime,"Tu as une facette de toi que tu caches même à tes proches ?",false,false
@@ -122,11 +122,11 @@ id,cat,text,spicy,jeune
 162,intime,"Tu as déjà eu honte d'une partie de ton identité ?",false,false
 163,intime,"C'est quoi la chose que tu fais pour te sentir bien quand tu vas vraiment mal ?",false,false
 164,intime,"Tu te considères comme quelqu'un de bien ? Pourquoi ?",false,false
-165,intime,"C'est quoi la chose que tu acceptes difficilement chez toi ?",false,false
+165,intime,"Qu'est ce que tu acceptes difficilement chez toi ?",false,false
 166,intime,"Tu as peur de quoi au fond ?",false,false
-167,intime,"C'est quoi le moment où tu t'es senti le plus seul ?",false,false
+167,intime,"Quand est ce que tu t'es senti le plus seul ?",false,false
 168,intime,"Tu te sens à ta place dans ta vie en ce moment ?",false,false
-169,intime,"C'est quoi quelque chose que tu t'es promis et que tu n'as pas tenu ?",false,false
+169,intime,"Qu'elle promesse tu t'es faite et tu n'as pas tenu ?",false,false
 170,intime,"Est-ce que tu te fais confiance ?",false,false
 180,entrenous,"C'est quoi la première chose que tu as pensé de moi quand on s'est rencontrés ?",false,false
 181,entrenous,"Il y a quelque chose que tu voudrais me dire mais que tu n'as jamais osé ?",false,false
@@ -134,11 +134,11 @@ id,cat,text,spicy,jeune
 183,entrenous,"C'est quoi la chose que tu apprécies le plus en moi ?",false,false
 184,entrenous,"C'est quoi un moment où j'ai changé ta façon de voir les choses ?",false,false
 185,entrenous,"Si tu devais décrire notre relation en un seul mot, ce serait lequel ?",false,false
-186,entrenous,"C'est quoi quelque chose que tu aurais aimé me dire il y a longtemps ?",false,false
+186,entrenous,"Qu'est ce que tu aurais aimé me dire il y a longtemps ?",false,false
 187,entrenous,"Il y a un malentendu entre nous que tu n'as jamais vraiment résolu ?",false,false
-188,entrenous,"C'est quoi la chose que tu aimes le moins chez moi mais que tu acceptes quand même ?",false,false
+188,entrenous,"Qu'elle est la chose que tu aimes le moins chez moi mais que tu acceptes quand même ?",false,false
 189,entrenous,"Tu as déjà eu peur de me perdre ?",false,false
-190,entrenous,"C'est quoi le moment où tu as réalisé qu'on avait une vraie connexion ?",false,false
+190,entrenous,"Quand est ce que tu as réalisé qu'on avait une vraie connexion ?",false,false
 191,entrenous,"Il y a quelque chose que tu fais différemment depuis qu'on se connaît ?",false,false
 192,entrenous,"C'est quoi le souvenir qui te fait sourire quand tu penses à nous ?",false,false
 193,entrenous,"Si tu devais me présenter à quelqu'un, qu'est-ce que tu dirais de moi ?",false,false
@@ -148,28 +148,28 @@ id,cat,text,spicy,jeune
 197,entrenous,"Tu m'as déjà jugé sans me le dire ?",false,false
 198,entrenous,"C'est quoi la chose que tu ferais différemment dans notre relation si tu pouvais ?",false,false
 199,entrenous,"Est-ce que tu penses qu'on se ressemble plus qu'on ne le montre ?",false,false
-200,entrenous,"C'est quoi quelque chose que tu n'as dit à personne d'autre qu'à moi ?",false,false
+200,entrenous,"Qu'est ce que tu n'as dit à personne d'autre qu'à moi ?",false,false
 210,societe,"C'est quoi le plus grand problème de notre génération ?",false,false
 211,societe,"Tu penses que les réseaux sociaux font plus de bien que de mal ?",false,false
-212,societe,"C'est quoi une opinion impopulaire que tu assumes pleinement ?",false,false
+212,societe,"Donne une opinion impopulaire que tu assumes pleinement ?",false,false
 213,societe,"Tu te sens libre dans la société dans laquelle tu vis ?",false,false
-214,societe,"C'est quoi une injustice qui t'énerve vraiment ?",false,false
+214,societe,"Donne une injustice qui t'énerve vraiment ?",false,false
 215,societe,"Si tu étais au pouvoir demain, quelle serait ta première décision ?",false,false
-216,societe,"C'est quoi un sujet dont on ne parle pas assez ?",false,false
+216,societe,"Cite un sujet dont on ne parle pas assez ?",false,false
 217,societe,"Tu penses que les médias nous montrent la réalité ?",false,false
 218,societe,"Tu te sens concerné par ce qui se passe dans le monde ou tu préfères t'en détacher ?",false,false
-219,societe,"C'est quoi une norme sociale que tu trouves absurde ?",false,false
+219,societe,"Qu'elle norme sociale tu trouves absurde ?",false,false
 220,societe,"Tu penses qu'il est encore possible de changer les choses à grande échelle ?",false,false
 221,societe,"Internet a changé ta façon de penser ? Dans quel sens ?",false,false
-222,societe,"C'est quoi un privilège que tu as et dont tu ne te rends pas toujours compte ?",false,false
+222,societe,"Cite un privilège que tu as et dont tu ne te rends pas toujours compte ?",false,false
 223,societe,"Tu penses qu'on vit mieux ou moins bien que la génération de nos parents ?",false,false
-224,societe,"C'est quoi une valeur que la société actuelle perd selon toi ?",false,false
+224,societe,"Cite une valeur que la société actuelle perd selon toi ?",false,false
 225,societe,"Tu fais confiance aux institutions : gouvernement, justice, médias ?",false,false
-226,societe,"C'est quoi le combat de ta génération ?",false,false
+226,societe,"C'est quoi le plus grand combat de ta génération ?",false,false
 227,societe,"Tu penses que l'intelligence artificielle va changer ta vie ? Comment ?",false,false
-228,societe,"C'est quoi une chose que ta culture t'a apprise que tu n'aurais pas voulu apprendre ?",false,false
+228,societe,"Qu'est ce que ta culture t'a apprise que tu n'aurais pas voulu apprendre ?",false,false
 229,societe,"Est-ce qu'on a le droit de juger les choix de vie des autres ?",false,false
-230,societe,"C'est quoi quelque chose que notre société fait vraiment bien ?",false,false
+230,societe,"Qu'est ce que notre société fait vraiment bien ?",false,false
 300,amour,"C'est quoi ta position sexuelle préférée ?",true,false
 301,intime,"Tu préfères être dominant ou soumis ?",true,false
 302,intime,"C'est quoi ton fantasme que tu n'as jamais réalisé et que tu aimerais réaliser ?",true,false
@@ -209,19 +209,19 @@ id,cat,text,spicy,jeune
 411,philo,"Tu trouves qu'il est difficile d'être toi-même au quotidien ? Pourquoi ?",false,true
 412,societe,"Les réseaux sociaux te font te sentir comment en général ?",false,true
 413,drole,"C'est quoi le mensonge le plus incroyable que tu aies dit à un prof ?",false,true
-414,futur,"C'est quoi quelque chose que tu veux absolument faire avant tes 20 ans ?",false,true
+414,futur,"Qu'est ce que tu veux absolument faire avant tes 25 ans ?",false,true
 415,philo,"Tu penses que l'amitié peut durer toute une vie ou les gens changent trop ?",false,true
 416,passe,"Il y a une période de ta vie où tu étais vraiment heureux. C'était quand ?",false,true
-417,societe,"C'est quoi quelque chose que tu voudrais que ta famille comprenne mieux de toi ?",false,true
-418,drole,"Tu as déjà fait semblant d'être malade pour rater l'école ? Comment ça s'est passé ?",false,true
+417,societe,"Qu'est ce que tu voudrais que ta famille comprenne mieux de toi ?",false,true
+418,drole,"Tu as déjà fait semblant d'être malade pour rater un événement quelconque ? Comment ça s'est passé ?",false,true
 419,futur,"C'est quoi ta plus grande peur pour ton avenir ?",false,true
 420,philo,"Est-ce que tu penses que tu es quelqu'un de courageux ? Donne un exemple.",false,true
-421,passe,"C'est quoi quelque chose que tu as fait dont tu es fier mais que tu n'as jamais dit à personne ?",false,true
-422,societe,"C'est quoi un problème du monde qui te touche vraiment, personnellement ?",false,true
+421,passe,"Qu'est ce que tu as fait dont tu es fier mais que tu n'as jamais dit à personne ?",false,true
+422,societe,"Quel problème du monde te touche vraiment, personnellement ?",false,true
 423,drole,"C'est quoi la situation la plus embarrassante que tu aies vécue avec quelqu'un que tu kiffes ?",false,true
 424,futur,"Tu imagines ta vie comment à 30 ans ? Famille, travail, endroit ?",false,true
-425,philo,"C'est quoi quelque chose que tu croyais fort quand tu étais petit et que tu ne crois plus ?",false,true
-426,passe,"C'est quoi un moment où tu t'es senti vraiment incompris ?",false,true
+425,philo,"Qui est ce que tu croyais fort quand tu étais petit et que tu ne crois plus ?",false,true
+426,passe,"Quand est ce que tu t'es senti vraiment incompris ?",false,true
 427,societe,"Si tu pouvais changer une règle à l'école ou à la maison, ce serait laquelle ?",false,true
 428,drole,"C'est quoi le défi ou le pari le plus idiot que tu aies accepté ?",false,true
-429,futur,"C'est quoi quelque chose que tu veux accomplir que personne dans ta famille n'a fait avant toi ?",false,true
+429,futur,"Qu'est ce que tu veux accomplir que personne dans ta famille n'a fait avant toi ?",false,true
